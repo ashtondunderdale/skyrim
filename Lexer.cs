@@ -4,6 +4,9 @@ namespace math_lang;
 
 internal class Lexer
 {
+    static List<Token> tokens = new();
+    const string SEPARATOR = ":";
+
     static readonly Dictionary<string, TokenType> keywords = new()
     {
         {"var", TokenType.var},
@@ -24,7 +27,6 @@ internal class Lexer
 
     public static void Parse(string content)
     {
-        List<Token> tokens = new();
 
         string[] lines = content.Split('\n');
 
@@ -34,13 +36,36 @@ internal class Lexer
 
             foreach (var word in words)
             {
-                if (IsKeywordMatch(word))
+                if (word.Contains(SEPARATOR)) 
                 {
-                    tokens.Add(new Token("", keywords[word]));
+                    var parts = word.Split(SEPARATOR);
+
+                    if (IsKeywordMatch(parts[0])) 
+                    {
+                        try
+                        {
+                            tokens.Add(new Token(parts[0], keywords[parts[0]]));
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                        }
+                    }
+                }
+
+                else if (IsKeywordMatch(word))
+                {
+                    try
+                    {
+                        tokens.Add(new Token("", keywords[word]));
+                    }
+                    catch (Exception e) 
+                    {
+                        Console.WriteLine(e);
+                    }
                 }
             }
         }
-
         OutputTokens();
     }
 
@@ -53,5 +78,11 @@ internal class Lexer
         return false;
     }
 
-
+    static void OutputTokens() 
+    {
+        foreach (Token token in tokens) 
+        {
+            Console.WriteLine(token.Value);
+        }
+    }
 }

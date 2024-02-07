@@ -4,8 +4,8 @@ namespace math_lang
 {
     internal class Token
     {
-        public static string Value;
-        public static TokenType Type;
+        public string Value;
+        public TokenType Type;
 
         public Token(string value, TokenType type) 
         {
