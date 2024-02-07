@@ -1,25 +1,57 @@
-﻿namespace math_lang;
+﻿using System.Text.RegularExpressions;
+
+namespace math_lang;
 
 internal class Lexer
 {
-    public static void Parse() 
+    static readonly Dictionary<string, TokenType> keywords = new()
     {
-        string path = @"C:\Users\adunderdale\text.txt";
-        var content = File.ReadAllLines(path);
+        {"var", TokenType.var},
+        {"print", TokenType.print}
+    };
 
-        ReadToken(content);
+    public enum TokenType
+    {
+        var,
+        print,
     }
 
-    public static void ReadToken(string[] content) 
+    public static void ReadFile()
     {
-        foreach (var line in content)
-        {
-            string[] tokens = line.Split('\n');
+        string content = File.ReadAllText(@"C:\Users\adunderdale\text.txt");
+        Parse(content);
+    }
 
-            foreach (var token in tokens) 
-            { 
-                
+    public static void Parse(string content)
+    {
+        List<Token> tokens = new();
+
+        string[] lines = content.Split('\n');
+
+        foreach (var line in lines)
+        {
+            string[] words = line.Split(' ');
+
+            foreach (var word in words)
+            {
+                if (IsKeywordMatch(word))
+                {
+                    tokens.Add(new Token("", keywords[word]));
+                }
             }
         }
+
+        OutputTokens();
     }
+
+    static bool IsKeywordMatch(string word)
+    {
+        foreach (var keyword in keywords.Keys)
+        {
+            if (Regex.IsMatch(word, @"\b" + Regex.Escape(keyword) + @"\b")) return true;     
+        }
+        return false;
+    }
+
+
 }

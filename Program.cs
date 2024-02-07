@@ -8,7 +8,7 @@ internal class Program
     {
         try
         {
-            Lexer.Parse();
+            Lexer.ReadFile();
         }
         catch (Exception ex)
         {
