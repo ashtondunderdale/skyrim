@@ -51,7 +51,7 @@ internal class Race
     {
         new Race { 
             Name = "Altmer", 
-            Description = "A high elf",
+            Description = "The high elves, also called Altmer, excel in arcane arts and can swiftly regenerate Magicka with their Highborn ability.\r\n\r\n\r\n",
 
             Magicka = 150, // yeah i know 
 
@@ -77,7 +77,7 @@ internal class Race
 
         new Race { 
             Name = "Argonian",
-            Description = "A lizard dude",
+            Description = "Argonians, native to Black Marsh, resist diseases, breathe underwater, and quickly regenerate health",
 
             Smithing = 15,
             HeavyArmour = 15,
@@ -102,6 +102,8 @@ internal class Race
         new Race {
             Name = "Bosmer",
 
+            Description = "From Western Valenwood, the Wood Elves, or Bosmer, are skilled scouts and archers. They resist poisons and diseases and can Command Animals.\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+
             Smithing = 15,
             HeavyArmour = 15,
             Block = 15,
@@ -124,6 +126,8 @@ internal class Race
 
         new Race {
             Name = "Breton",
+
+            Description = "Bretons from High Rock are skilled in spellcraft and possess innate magic resistance. They can absorb spells using Dragonskin.",
 
             Smithing = 15,
             HeavyArmour = 15,
@@ -148,6 +152,8 @@ internal class Race
         new Race {
             Name = "Dunmer",
 
+            Description = "Dark elves, or Dunmer, are adept in stealth and magic, resistant to fire, and can envelop themselves in flames with Ancestor's Wrath.",
+
             Smithing = 15,
             HeavyArmour = 15,
             Block = 15,
@@ -170,6 +176,8 @@ internal class Race
 
         new Race {
             Name = "Imperial",
+
+            Description = "Cyrodiil's Imperials excel in diplomacy, trade, combat, and magic. They possess a unique ability to charm enemies with the Voice of the Emperor.\r\n\r\n\r\n\r\n\r\n\r\n",
 
             Smithing = 15,
             HeavyArmour = 20,
@@ -194,6 +202,8 @@ internal class Race
         new Race {
             Name = "Khajiit",
 
+            Description = "From Elsweyr, Khajiit are intelligent, agile thieves, able to see in the dark at will and attack with their claws.\r\n\r\n\r\n\r\n\r\n\r\n",
+
             Smithing = 15,
             HeavyArmour = 15,
             Block = 15,
@@ -216,6 +226,8 @@ internal class Race
 
         new Race {
             Name = "Nord",
+
+            Description = "Skyrim's inhabitants, Nords are tall, fair-haired, and resilient to cold. Renowned as skilled warriors, they can use a Battlecry to intimidate foes.\r\n\r\n\r\n\r\n\r\n\r\n",
 
             Smithing = 20,
             HeavyArmour = 15,
@@ -240,6 +252,8 @@ internal class Race
         new Race {
             Name = "Orsimer",
 
+            Description = "Orcs, renowned for their craftsmanship and battle prowess, hail from the rugged Wrothgarian and Dragontail Mountains.\r\n\r\n\r\n\r\n\r\n\r\n",
+
             Smithing = 20,
             HeavyArmour = 25,
             Block = 20,
@@ -262,6 +276,8 @@ internal class Race
 
         new Race {
             Name = "Redguard",
+
+            Description = "Hammerfell's Redguards, highly skilled fighters, are immune to poison and can trigger an Adrenaline Rush in battle.\r\n\r\n\r\n\r\n\r\n",
 
             Smithing = 20,
             HeavyArmour = 15,

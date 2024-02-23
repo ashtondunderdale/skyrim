@@ -14,6 +14,9 @@ internal class Scripts
     const string NPC_IMPERIAL_CAPTAIN = "Imperial Captain";
     const string NPC_HADVAR = "Hadvar";
 
+    const ConsoleColor CONTEXTCOLOUR = ConsoleColor.DarkGray;
+    const ConsoleColor BASECOLOUR = ConsoleColor.White;
+
     public static void PlayIntroScript()
     {
         Clear();
@@ -21,28 +24,30 @@ internal class Scripts
         Sleep(2);
         PlayIntroMusic();
 
-        Sleep(0); // 17
+        Sleep(17);
 
-        Console.ForegroundColor = ConsoleColor.Gray;
-        PrintDialogueContext("\tThe Elder Scrolls");
-        Sleep(12);
+        PrintDialogueContext("\tThe Elder Scrolls V");
+        Sleep(11);
         Clear();
 
-        Console.ForegroundColor = ConsoleColor.White;
-        PrintDialogueContext("\tSkyrim");
+        Console.ForegroundColor = BASECOLOUR;
+        Console.WriteLine("\n\n\tSkyrim");
         Sleep(7);
         Clear();
 
         Sleep(5);
 
-        PrintDialogueContext("You awake on an Imperial wagon driving four prisoners down a snowy mountain pass.");
-        Sleep(7);
+
+        Console.ForegroundColor = CONTEXTCOLOUR;
+        Console.Write("You awake on an Imperial wagon driving four prisoners down a snowy mountain pass.\n\n");
+        Console.ForegroundColor = BASECOLOUR;
+        Sleep(5);
 
         PrintDialogue(NPC_RALOF, "Hey, you. You're finally awake. You were trying to cross the border, right? Walked right into that Imperial ambush, same as us, and that thief over there.");
-        Sleep(5);
+        Sleep(3);
 
         PrintDialogue(NPC_LOKIR, "Damn you Stormcloaks. Skyrim was fine until you came along. Empire was nice and lazy. If they hadn't been looking for you, I could've stolen that horse and been half way to Hammerfell. You there. You and me - we shouldn't be here. It's these Stormcloaks the Empire wants.");
-        Sleep(9);
+        Sleep(6);
 
         PrintDialogue(NPC_RALOF, "We're all brothers and sisters in binds now, thief.");
         Sleep(3);
@@ -50,31 +55,29 @@ internal class Scripts
         PrintDialogue(NPC_IMPERIAL_SOLDIER, "Shut up back there!");
         Sleep(2);
 
-        Console.ForegroundColor = ConsoleColor.Gray;
         PrintDialogueContext("Lokir looks at the gagged man.");
-        Console.ForegroundColor = ConsoleColor.White;
         Sleep(3);
 
         PrintDialogue(NPC_LOKIR, "And what’s wrong with him?");
         Sleep(3);
 
         PrintDialogue(NPC_RALOF, "Watch your tongue! You’re speaking to Ulfric Stormcloak, the true High King.");
-        Sleep(4);
+        Sleep(3);
 
         PrintDialogue(NPC_LOKIR, "Ulfric? The Jarl of Windhelm? You’re the leader of the rebellion. But if they captured you… Oh gods, where are they taking us?");
-        Sleep(5);
+        Sleep(4);
 
         PrintDialogue(NPC_RALOF, "I dont know where we're going, but Sovngarde awaits.");
-        Sleep(5);
+        Sleep(3);
 
         PrintDialogue(NPC_LOKIR, "No, this can’t be happening. This isn’t happening.");
-        Sleep(5);
+        Sleep(2);
 
         PrintDialogue(NPC_RALOF, "Hey, what village are you from, horse thief?");
         Sleep(3);
 
         PrintDialogue(NPC_LOKIR, "Why do you care?");
-        Sleep(3);
+        Sleep(2);
 
         PrintDialogue(NPC_RALOF, "A Nord’s last thoughts should be of home.");
         Sleep(4);
@@ -82,9 +85,7 @@ internal class Scripts
         PrintDialogue(NPC_LOKIR, "Rorikstead. I’m… I’m from Rorikstead.");
         Sleep(2);
 
-        Console.ForegroundColor = ConsoleColor.Gray;
         PrintDialogueContext("You approach the village of Helgen. A soldier calls out to the lead wagon.");
-        Console.ForegroundColor = ConsoleColor.White;
         Sleep(3);
 
         PrintDialogue(NPC_IMPERIAL_SOLDIER, "General Tullius, sir! The headsman is waiting!");
@@ -93,15 +94,13 @@ internal class Scripts
         PrintDialogue(NPC_GENERAL_TULLIUS, "Good. Let’s get this over with.");
         Sleep(5);
 
-        PrintDialogue(NPC_LOKIR, "Lokir: Shor, Mara, Dibella, Kynareth, Akatosh. Divines, please help me.");
+        PrintDialogue(NPC_LOKIR, "Shor, Mara, Dibella, Kynareth, Akatosh. Divines, please help me.");
+        Sleep(4);
+
+        PrintDialogue(NPC_RALOF, "Look at him, General Tullius the Military Governor. And it looks like the Thalmor are with him. Damn elves. I bet they had something to do with this. This is Helgen. I used to be sweet on a girl from here. Wonder if Vilod is still making that mead with juniper berries mixed in. Funny… when I was a boy, Imperial walls and towers used to make me feel so safe.");
         Sleep(5);
 
-        PrintDialogue(NPC_RALOF, "Ralof: Look at him, General Tullius the Military Governor. And it looks like the Thalmor are with him. Damn elves. I bet they had something to do with this. This is Helgen. I used to be sweet on a girl from here. Wonder if Vilod is still making that mead with juniper berries mixed in. Funny… when I was a boy, Imperial walls and towers used to make me feel so safe.");
-        Sleep(7);
-
-        Console.ForegroundColor = ConsoleColor.Gray;
         PrintDialogueContext("A man and son watch the prisoners pull into town.");
-        Console.ForegroundColor = ConsoleColor.White;
         Sleep(3);
 
         PrintDialogue(NPC_HAMING, "Who are they, daddy? Where are they going?");
@@ -155,9 +154,7 @@ internal class Scripts
         PrintDialogue(NPC_LOKIR, "No, I'm not a rebel. You can't do this!");
         Sleep(2);
 
-        Console.ForegroundColor = ConsoleColor.Gray;
         PrintDialogueContext("Lokir attempts to run away.");
-        Console.ForegroundColor = ConsoleColor.White;
         Sleep(2);
 
         PrintDialogue(NPC_IMPERIAL_CAPTAIN, "Halt!");
@@ -169,9 +166,7 @@ internal class Scripts
         PrintDialogue(NPC_IMPERIAL_CAPTAIN, "Archers!");
         Sleep(1);
 
-        Console.ForegroundColor = ConsoleColor.Gray;
         PrintDialogueContext("An arrow is shot into Lokir's back");
-        Console.ForegroundColor = ConsoleColor.White;
         Sleep(3);
 
         PrintDialogue(NPC_IMPERIAL_CAPTAIN, "Anyone else feel like running?");
@@ -207,7 +202,12 @@ internal class Scripts
         Console.WriteLine();
     }
 
-    static void PrintDialogueContext(string dialogue) => Console.Write($"\n\n{dialogue}\n\n");
+    static void PrintDialogueContext(string dialogue) 
+    {
+        Console.ForegroundColor = CONTEXTCOLOUR;
+        Console.Write($"\n\n{dialogue}\n\n");
+        Console.ForegroundColor = BASECOLOUR;
+    }
 
     static void Sleep(int seconds) => Thread.Sleep(seconds * 1000);
 

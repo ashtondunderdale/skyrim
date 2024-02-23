@@ -7,9 +7,12 @@ internal class Program
 {
     static void Main()
     {
-        Race race = ShowCharacterCreation();
-        Console.Write(race.Name);
 
+        Play();
+    }
+
+    public static void Play() 
+    {
         Console.WriteLine("Play Intro? (y)");
         string? playIntro = Console.ReadLine();
 
@@ -18,9 +21,11 @@ internal class Program
             Scripts.PlayIntroScript();
         }
 
+        Console.Clear();
+        Race race = ShowCharacterCreationMenu();
     }
 
-    public static Race ShowCharacterCreation() 
+    public static Race ShowCharacterCreationMenu() 
     {
         Console.ForegroundColor = ConsoleColor.DarkGray;
         int activeRaceIndex = 0;
@@ -35,8 +40,6 @@ internal class Program
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"\n > {Race.Races[i].Name} \n");
                     Console.ForegroundColor = ConsoleColor.DarkGray;
-
-
                 }
                 else
                 {
@@ -45,7 +48,9 @@ internal class Program
             }
 
             Console.SetCursorPosition(20, 20);
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(Race.Races[activeRaceIndex].Description);
+            Console.ForegroundColor = ConsoleColor.DarkGray;
 
             ConsoleKeyInfo input = Console.ReadKey(intercept: true);
 
