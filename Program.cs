@@ -1,18 +1,32 @@
-﻿using System.Text;
-
-namespace math_lang;
+﻿namespace skyrim;
 
 internal class Program
 {
     static void Main()
     {
-        try
+
+        Console.WriteLine("Play Intro? (y)");
+        string? playIntro = Console.ReadLine();
+
+        if (playIntro == "y") 
         {
-            Lexer.ReadFile();
+            PlayIntroScript();
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error reading the file: {ex.Message}");
-        }
+    }
+
+    static void PlayIntroScript() 
+    {
+        Console.Clear();
+        Console.WriteLine("\n\n\tThe Elder Scrolls");
+        Thread.Sleep(3000);
+        Console.Clear();
+        Console.WriteLine("\n\n\tSkyrim");
+        Thread.Sleep(3000);
+        Console.Clear();
+
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("You awake on an Imperial wagon driving four prisoners down a snowy mountain pass.");
+        Thread.Sleep(1000);
     }
 }
