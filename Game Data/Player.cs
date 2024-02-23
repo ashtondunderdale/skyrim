@@ -16,6 +16,8 @@ internal class Player
 
     int Magicka { get; set; }
 
+    Scene? Scene { get; set; }
+
     public Player(string name, Race race) 
     {
         Name = name;

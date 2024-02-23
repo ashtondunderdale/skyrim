@@ -40,7 +40,6 @@ internal class Scripts
 
         Sleep(5);
 
-
         Console.ForegroundColor = CONTEXTCOLOUR;
         Console.Write("You awake on an Imperial wagon driving four prisoners down a snowy mountain pass.\n\n");
         Console.ForegroundColor = BASECOLOUR;
@@ -326,7 +325,7 @@ internal class Scripts
         PrintDialogueContext("You follow Hadvar towards the keep. Hidden next to a stone wall, the dragon lands above you and shouts what seemed like thunder through the air.");
         Sleep(3);
 
-        PrintDialogueContext("You continue to follow Hadvar. Ralof appears and stands in his way");
+        PrintDialogueContext("You continue to follow Hadvar. Ralof appears and stands in his way.");
         Sleep(2);
 
         PrintDialogue(NPC_HADVAR, "Ralof! You damned trator. Out of my way!");
@@ -343,8 +342,23 @@ internal class Scripts
 
         PrintDialogue(NPC_HADVAR, "With me, prisoner. Let's go!");
         Sleep(3);
+    }
 
-        ShowPlayerDecisionOptions(new List<string>() { "Hadvar", "Ralof" }, "Enter the keep with Hadvar or Ralof.");
+    public static void PlayHelgenKeepHadvarScript() 
+    {
+        Clear();
+
+        PrintDialogue(NPC_HADVAR, "Looks like we're the only ones who made it. Was that really a dragon? The bringers of the End Times?");
+        Sleep(2);
+
+        PrintDialogue(NPC_HADVAR, "We should keep moving. Come here. Let me see if I can get those bindings off.");
+        Sleep(2);
+
+        PrintDialogueContext("Hadvar takes off your bindings.");
+        Sleep(2);
+
+        PrintDialogue(NPC_HADVAR, "There you go. Take a look around, there should be plenty of gear to choose from. I'm going to see if I can find something for these burns.");
+        Sleep(3);
     }
 
     public static string ShowPlayerDecisionOptions(List<string> options, string decisionHeader)

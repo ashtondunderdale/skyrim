@@ -44,12 +44,12 @@ internal class Program
         Console.WriteLine("\nPlay Intro? (y)");
         string? playIntro = Console.ReadLine();
 
+        Scripts.FirstLoadingScript();
+
         if (playIntro == "y")
         {
             Scripts.PlayIntroScript();
         }
-
-        Scripts.FirstLoadingScript();
 
         Console.Clear();
         Race race = ShowCharacterCreationMenu();
@@ -67,6 +67,13 @@ internal class Program
         }
 
         Scripts.PlayHelgenScript(race);
+
+        string helgenKeepChoice = Scripts.ShowPlayerDecisionOptions(new List<string>() { "Hadvar", "Ralof" }, "Enter the keep with Hadvar or Ralof.");
+
+        if (helgenKeepChoice == "Hadvar")
+        {
+            Scripts.PlayHelgenKeepHadvarScript();
+        }
     }
 
     public static Race ShowCharacterCreationMenu() 
