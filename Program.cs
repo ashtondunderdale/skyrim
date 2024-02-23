@@ -1,5 +1,4 @@
-﻿using skyrim;
-using System.Media;
+﻿using System.Media;
 
 namespace Skyrim;
 
@@ -7,11 +6,36 @@ internal class Program
 {
     static void Main()
     {
+        SoundPlayer player = new(@"C:\Users\adunderdale\source\repos\lang\bin\Debug\menu.wav");
+        PlayMenuMusic(player);
 
-        Play();
+        while (true) 
+        {
+            Console.Write(Data.SKYRIM_LOGO);
+            Console.WriteLine("\n\n1. New\n2. Load\n");
+
+            string? menuChoice = Console.ReadLine();
+
+            switch (menuChoice)
+            {
+                case "1":
+                    player.Stop();
+                    PlayNewGame();
+                    break;
+
+                case "2":
+                    player.Stop();
+                    // to implement continue game
+                    break;
+
+                default:
+                    Console.Clear();
+                    continue;
+            }
+        }
     }
 
-    public static void Play() 
+    public static void PlayNewGame() 
     {
         Console.WriteLine("Play Intro? (y)");
         string? playIntro = Console.ReadLine();
@@ -73,6 +97,18 @@ internal class Program
             else if (input.Key == ConsoleKey.Enter) return Race.Races[activeRaceIndex];     
 
             Console.Clear();
+        }
+    }
+
+    static void PlayMenuMusic(SoundPlayer player)
+    {
+        try
+        {
+            player.Play();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error playing intro music: {ex.Message}");
         }
     }
 }

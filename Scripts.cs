@@ -1,7 +1,6 @@
 ﻿using System.Media;
-using static System.Net.Mime.MediaTypeNames;
 
-namespace skyrim;
+namespace Skyrim;
 
 internal class Scripts
 {
@@ -21,7 +20,7 @@ internal class Scripts
     {
         Clear();
 
-        Sleep(2);
+        Sleep(5);
         PlayIntroMusic();
 
         Sleep(17);

@@ -1,4 +1,4 @@
-﻿namespace skyrim;
+﻿namespace Skyrim;
 
 internal class Race
 {
@@ -299,4 +299,9 @@ internal class Race
             Enchantment = 15,
         },
     };
+}
+
+internal class Data
+{
+    public const string SKYRIM_LOGO = "                                                            \r\n                                                            \r\n                           -    =                           \r\n                          @.    :@                          \r\n                         @: -    =@                         \r\n                        @@  @#=   @@                        \r\n                       %@: .@  %  +@=                       \r\n                      =@@      :-  @@.                      \r\n                     .@@*:  +@-   :@@@                      \r\n                     @=@    @.      @=@                     \r\n                    @+@@  #=@@@ +#  @@-@                    \r\n                    *@@@%--*@@@@=*=@@*@-                    \r\n                     #@@@=@@@@@@@@+@@@+                     \r\n                      @@@  +=@@%*  @@#                      \r\n                       @@     @    @@                       \r\n                        @%    @.  @@                        \r\n                         @@  :@  @@                         \r\n                         :@ .@   @                          \r\n                          +  @                              \r\n                            +                               \r\n                            %                               \r\n                             @@                             \r\n                                                            \r\n                                                          ";
 }
