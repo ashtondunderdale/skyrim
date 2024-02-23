@@ -12,6 +12,10 @@ internal class Scripts
     const string NPC_TOROLF = "Torolf";
     const string NPC_IMPERIAL_CAPTAIN = "Imperial Captain";
     const string NPC_HADVAR = "Hadvar";
+    const string NPC_PRIESTESS_OF_ARKAY = "Priestess of Arkay";
+    const string NPC_STORMCLOAK_SOLDIER = "Stormclock Soldier";
+    const string NPC_VILOD = "Vilod";
+    const string NPC_INGRID = "Ingrid";
 
     public const ConsoleColor CONTEXTCOLOUR = ConsoleColor.DarkGray;
     public const ConsoleColor BASECOLOUR = ConsoleColor.White;
@@ -199,11 +203,86 @@ internal class Scripts
             _ => "I'm sorry. We'll make sure your remains are taken care of.",
         };
 
-        PrintDialogue("NPC_HADVAR", dialogue);
+        PrintDialogue(NPC_HADVAR, dialogue);
+        Sleep(2);
+
+        PrintDialogue(NPC_HADVAR, "Captain. What should we do? He's not on the list.");
+        Sleep(3);
+
+        PrintDialogue(NPC_IMPERIAL_CAPTAIN, "Forget the list. He goes to the block.");
+        Sleep(3);
+
+        PrintDialogue(NPC_HADVAR, "By your orders, Captain.");
+        Sleep(2);
+
+        PrintDialogue(NPC_HADVAR, "Follow the Captain, prisoner.");
+        Sleep(2);
+
+        PrintDialogueContext("You follow the Imperial Captain towards the block.");
+        Sleep(8);
+
+        PrintDialogue(NPC_GENERAL_TULLIUS, "Ulfric Stormcloak. Some here in Helgen call you a hero. But a hero doesn't use a power like the Voice to murder his king and usurp his throne.");
+        Sleep(3);
+
+        PrintDialogue(NPC_GENERAL_TULLIUS, "You started this war, plunged Skyrim into chaos, and now the Empire is going to put you down, and restore the peace.");
+        Sleep(5);
+
+        PrintDialogueContext("You hear an eery sound rumbling in the distance.");
+        Sleep(2);
+
+        PrintDialogue(NPC_HADVAR, "What was that?");
+        Sleep(2);
+
+        PrintDialogue(NPC_GENERAL_TULLIUS, "It's nothing. Carry on.");
+        Sleep(2);
+
+        PrintDialogue(NPC_IMPERIAL_CAPTAIN, "Yes, General Tullius.");
+        Sleep(2);
+
+        PrintDialogue(NPC_IMPERIAL_CAPTAIN, "Give them their last rites");
+        Sleep(3);
+
+        PrintDialogue(NPC_PRIESTESS_OF_ARKAY, "As we commend your souls to Aetherius, blessings of the Eight Divines upon you, for you are the salt and earth of Nirn, our beloved...");
+        Sleep(5);
+
+        PrintDialogueContext("The priestess is cut off by a Stormcloak soldier");
+        Sleep(1);
+
+        PrintDialogue(NPC_STORMCLOAK_SOLDIER, "For the love of Talos, shut up and let's get this over with.");
+        Sleep(2);
+
+        PrintDialogue(NPC_PRIESTESS_OF_ARKAY, "As you wish.");
+        Sleep(5);
+
+        PrintDialogueContext("The soldier is taken to the chopping block.");
+        Sleep(3);
+
+        PrintDialogue(NPC_STORMCLOAK_SOLDIER, "Come on, I haven't got all morning.");
+        Sleep(2);
+
+        PrintDialogue(NPC_STORMCLOAK_SOLDIER, "My ancestors are smiling at me, Imperials. Can you say the same?");
+        Sleep(3);
+
+        PrintDialogueContext("The Soldiers head falls into the basket below.");
+        Sleep(3);
+
+        PrintDialogue(NPC_STORMCLOAK_SOLDIER, "You Imperial bastards!");
+        Sleep(2);
+
+        PrintDialogue(NPC_VILOD, "Justice!");
+        Sleep(2);
+
+        PrintDialogue(NPC_INGRID, "Death to the Stormcloaks!");
+        Sleep(2);
+
+        PrintDialogue(NPC_RALOF, "As fearless in death as he was in life.");
+        Sleep(2);
+
+        PrintDialogue(NPC_IMPERIAL_CAPTAIN, $"Next, the {race.Name}");
         Sleep(2);
     }
 
-    public static void FirstLoadingScript() 
+    public static void FirstLoadingScript()
     {
         Clear();
 
@@ -245,7 +324,7 @@ internal class Scripts
         Console.WriteLine();
     }
 
-    static void PrintDialogueContext(string dialogue) 
+    static void PrintDialogueContext(string dialogue)
     {
         Console.ForegroundColor = CONTEXTCOLOUR;
         Console.Write($"\n\n{dialogue}\n\n");
