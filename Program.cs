@@ -7,7 +7,8 @@ internal class Program
 {
     static void Main()
     {
-        ShowCharacterCreation();
+        Race race = ShowCharacterCreation();
+        Console.Write(race.Name);
 
         Console.WriteLine("Play Intro? (y)");
         string? playIntro = Console.ReadLine();
@@ -27,19 +28,24 @@ internal class Program
 
         while (true)
         {
-            foreach (var race in Race.Races)
+            for (int i = 0; i < Race.Races.Count; i++)
             {
-                if (race == activeRace)
+                if (Race.Races[i] == activeRace)
                 {
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine(race.Name);
+                    Console.WriteLine($"\n > {Race.Races[i].Name} \n");
                     Console.ForegroundColor = ConsoleColor.DarkGray;
+
+
                 }
                 else
                 {
-                    Console.WriteLine(race.Name);
+                    Console.WriteLine($"{Race.Races[i].Name}");
                 }
             }
+
+            Console.SetCursorPosition(20, 20);
+            Console.WriteLine(Race.Races[activeRaceIndex].Description);
 
             ConsoleKeyInfo input = Console.ReadKey(intercept: true);
 
@@ -59,10 +65,7 @@ internal class Program
                     activeRace = Race.Races[activeRaceIndex];
                 }
             }
-            else if (input.Key == ConsoleKey.Enter) 
-            {
-                return Race.Races[activeRaceIndex];
-            }
+            else if (input.Key == ConsoleKey.Enter) return Race.Races[activeRaceIndex];     
 
             Console.Clear();
         }

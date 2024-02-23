@@ -8,30 +8,50 @@ internal class Race
     public int Health = 100;
 
     public int Stamina = 100;
+
     public int Magicka = 100;
+
     public int Smithing { get; set; }
+
     public int HeavyArmour { get; set; }
+
     public int Block { get; set; }
+
     public int TwoHanded { get; set; }
+
     public int OneHanded { get; set; }
+
     public int Archery { get; set; }
+
     public int LightArmor { get; set; }
+
     public int Sneak { get; set; }
+
     public int Lockpicking { get; set; }
+
     public int Pickpocket { get; set; }
+
     public int Speech { get; set; }
+
     public int Alchemy { get; set; }
+
     public int Illusion { get; set; }
+
     public int Conjuration { get; set; }
+
     public int Destruction { get; set; }
+
     public int Restoration { get; set; }
+
     public int Alteration { get; set; }
+
     public int Enchantment { get; set; }
 
     public static List<Race> Races { get; } = new List<Race>
     {
         new Race { 
             Name = "Altmer", 
+            Description = "A high elf",
 
             Magicka = 150, // yeah i know 
 
@@ -57,6 +77,7 @@ internal class Race
 
         new Race { 
             Name = "Argonian",
+            Description = "A lizard dude",
 
             Smithing = 15,
             HeavyArmour = 15,
