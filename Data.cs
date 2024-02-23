@@ -3,11 +3,15 @@
 internal class Race
 {
     public string? Name { get; set; }
+
     public string? Description { get; set; }
+
 
     public int Health = 100;
 
+
     public int Stamina = 100;
+
 
     public int Magicka = 100;
 

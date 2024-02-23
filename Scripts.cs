@@ -13,8 +13,8 @@ internal class Scripts
     const string NPC_IMPERIAL_CAPTAIN = "Imperial Captain";
     const string NPC_HADVAR = "Hadvar";
 
-    const ConsoleColor CONTEXTCOLOUR = ConsoleColor.DarkGray;
-    const ConsoleColor BASECOLOUR = ConsoleColor.White;
+    public const ConsoleColor CONTEXTCOLOUR = ConsoleColor.DarkGray;
+    public const ConsoleColor BASECOLOUR = ConsoleColor.White;
 
     public static void PlayIntroScript()
     {

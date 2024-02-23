@@ -1,4 +1,5 @@
-﻿using System.Media;
+﻿using skyrim;
+using System.Media;
 
 namespace Skyrim;
 
@@ -11,7 +12,10 @@ internal class Program
 
         while (true) 
         {
+            Console.ForegroundColor = Scripts.BASECOLOUR;
             Console.Write(Data.SKYRIM_LOGO);
+
+            Console.ForegroundColor = Scripts.CONTEXTCOLOUR;
             Console.WriteLine("\n\n1. New\n2. Load\n");
 
             string? menuChoice = Console.ReadLine();
@@ -37,7 +41,7 @@ internal class Program
 
     public static void PlayNewGame() 
     {
-        Console.WriteLine("Play Intro? (y)");
+        Console.WriteLine("\nPlay Intro? (y)");
         string? playIntro = Console.ReadLine();
 
         if (playIntro == "y")
@@ -47,6 +51,20 @@ internal class Program
 
         Console.Clear();
         Race race = ShowCharacterCreationMenu();
+
+        while (true) 
+        {
+            Console.WriteLine("\nEnter name: ");
+            string? name = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                Player player = new(name, race);
+                break;
+            }
+        }
+
+        // here
     }
 
     public static Race ShowCharacterCreationMenu() 
