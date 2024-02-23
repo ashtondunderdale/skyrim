@@ -66,7 +66,7 @@ internal class Program
             }
         }
 
-
+        Scripts.PlayHelgenScript(race);
     }
 
     public static Race ShowCharacterCreationMenu() 

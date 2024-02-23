@@ -175,6 +175,34 @@ internal class Scripts
         Sleep(2);
     }
 
+    public static void PlayHelgenScript(Race race)
+    {
+        Clear();
+
+        Console.ForegroundColor = CONTEXTCOLOUR;
+        Console.Write("Hadvar fills in the ledger.\n\n");
+        Console.ForegroundColor = BASECOLOUR;
+        Sleep(3);
+
+        string dialogue = race.Name switch
+        {
+            "High Elf" => "You're not with the Thalmor Embassy, are you High Elf? No, that can't be right... I'm sorry. We'll make sure your remains are returned to Summerset Isle.",
+            "Argonian" => "Are you a relative of one of the Riften dock workers, Argonian? I'm sorry. We'll make sure your remains are returned to Black Marsh.",
+            "Wood Elf" => "Not many Wood Elves would choose to come alone to Skyrim. I'm sorry. We'll make sure your remains are returned to Valenwood.",
+            "Breton" => "You from Daggerfall, Breton? Fleeing from some court intrigue? I'm sorry. We'll make sure your remains are returned to High Rock.",
+            "Dark Elf" => "Another refugee? Gods really have abandoned your people, Dark Elf. I'm sorry. We'll make sure your remains are returned to Morrowind.",
+            "Imperial" => "You're a long way from the Imperial City. What're you doing in Skyrim? I'm sorry. We'll make sure your remains are returned to Cyrodiil.",
+            "Khajiit" => "You with one of the trade caravans, Khajiit? Your kind always seems to find trouble. I'm sorry. We'll make sure your remains are returned to Elsweyr.",
+            "Nord" => "You picked a bad time to come home to Skyrim, kinsman. I'm sorry. At least you'll die here, in your homeland.",
+            "Orc" => "You from one of the strongholds, Orc? How did you end up here? I'm sorry. We'll make sure your remains are returned to Orsinium.",
+            "Redguard" => "What're you doing here, Redguard? You a sellsword? A sailor from Stros M'kai? I'm sorry. We'll make sure your remains are returned to Hammerfell.",
+            _ => "I'm sorry. We'll make sure your remains are taken care of.",
+        };
+
+        PrintDialogue("NPC_HADVAR", dialogue);
+        Sleep(2);
+    }
+
     public static void FirstLoadingScript() 
     {
         Clear();
