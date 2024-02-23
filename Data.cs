@@ -54,8 +54,8 @@ internal class Race
     public static List<Race> Races { get; } = new List<Race>
     {
         new Race { 
-            Name = "Altmer", 
-            Description = "The high elves, also called Altmer, excel in arcane arts and can swiftly regenerate Magicka with their Highborn ability.\r\n\r\n\r\n",
+            Name = "High Elf", 
+            Description = "Also known as \"Altmer\" in their homeland of Summerset Isle, the high elves are the most strongly gifted in the arcane arts of all the races. They can call upon their Highborn power to regenerate Magicka quickly.",
 
             Magicka = 150, // yeah i know 
 
@@ -81,7 +81,7 @@ internal class Race
 
         new Race { 
             Name = "Argonian",
-            Description = "Argonians, native to Black Marsh, resist diseases, breathe underwater, and quickly regenerate health",
+            Description = "This reptilian race, well-suited for the treacherous swamps of their Black Marsh homeland, has developed a natural resistance to diseases and the ability to breathe underwater. They can call upon the Histskin to regenerate health very quickly.",
 
             Smithing = 15,
             HeavyArmour = 15,
@@ -104,9 +104,9 @@ internal class Race
         },
 
         new Race {
-            Name = "Bosmer",
+            Name = "Wood Elf",
 
-            Description = "From Western Valenwood, the Wood Elves, or Bosmer, are skilled scouts and archers. They resist poisons and diseases and can Command Animals.\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+            Description = "The clanfolk of the Western Valenwood forests, also known as \"Bosmer.\" Wood elves make good scouts and thieves, and there are no finer archers in all of Tamriel. They have natural resistances to both poisons and diseases. They can Command Animals to fight for them.",
 
             Smithing = 15,
             HeavyArmour = 15,
@@ -131,7 +131,7 @@ internal class Race
         new Race {
             Name = "Breton",
 
-            Description = "Bretons from High Rock are skilled in spellcraft and possess innate magic resistance. They can absorb spells using Dragonskin.",
+            Description = "In addition to their quick and perceptive grasp of spellcraft, even the humblest of High Rock's Bretons can boast a resistance to magic. Bretons can call upon the Dragonskin power to absorb spells.",
 
             Smithing = 15,
             HeavyArmour = 15,
@@ -154,9 +154,9 @@ internal class Race
         },
 
         new Race {
-            Name = "Dunmer",
+            Name = "Dark Elf",
 
-            Description = "Dark elves, or Dunmer, are adept in stealth and magic, resistant to fire, and can envelop themselves in flames with Ancestor's Wrath.",
+            Description = "Also known as \"Dunmer\" in their homeland of Morrowind, dark elves are noted for their stealth and magic skills. They are naturally resistant to fire and can call upon their Ancestor's Wrath to surround themselves in fire.",
 
             Smithing = 15,
             HeavyArmour = 15,
@@ -181,7 +181,7 @@ internal class Race
         new Race {
             Name = "Imperial",
 
-            Description = "Cyrodiil's Imperials excel in diplomacy, trade, combat, and magic. They possess a unique ability to charm enemies with the Voice of the Emperor.\r\n\r\n\r\n\r\n\r\n\r\n",
+            Description = "Natives of Cyrodiil, they have proved to be shrewd diplomats and traders. They are skilled with combat and magic. Anywhere gold coins might be found, Imperials always seem to find a few more. They can call upon the Voice of the Emperor to calm an enemy.",
 
             Smithing = 15,
             HeavyArmour = 20,
@@ -206,7 +206,7 @@ internal class Race
         new Race {
             Name = "Khajiit",
 
-            Description = "From Elsweyr, Khajiit are intelligent, agile thieves, able to see in the dark at will and attack with their claws.\r\n\r\n\r\n\r\n\r\n\r\n",
+            Description = "Hailing from the province of Elsweyr, they are intelligent, quick, and agile. They make excellent thieves due to their natural stealthiness. All Khajiit can see in the dark at will and have unarmed claw attacks.",
 
             Smithing = 15,
             HeavyArmour = 15,
@@ -231,7 +231,7 @@ internal class Race
         new Race {
             Name = "Nord",
 
-            Description = "Skyrim's inhabitants, Nords are tall, fair-haired, and resilient to cold. Renowned as skilled warriors, they can use a Battlecry to intimidate foes.\r\n\r\n\r\n\r\n\r\n\r\n",
+            Description = "Citizens of Skyrim, they are a tall and fair-haired people. Strong and hardy, Nords are famous for their resistance to cold and their talent as warriors. They can use a Battlecry to make opponents flee.",
 
             Smithing = 20,
             HeavyArmour = 15,
@@ -254,9 +254,9 @@ internal class Race
         },
 
         new Race {
-            Name = "Orsimer",
+            Name = "Orc",
 
-            Description = "Orcs, renowned for their craftsmanship and battle prowess, hail from the rugged Wrothgarian and Dragontail Mountains.\r\n\r\n\r\n\r\n\r\n\r\n",
+            Description = "The people of the Wrothgarian and Dragontail Mountains, Orcish smiths are prized for their craftsmanship. Orc troops in Heavy Armor are among the finest in the Empire, and are fearsome when using their Berserker Rage.",
 
             Smithing = 20,
             HeavyArmour = 25,
@@ -281,7 +281,7 @@ internal class Race
         new Race {
             Name = "Redguard",
 
-            Description = "Hammerfell's Redguards, highly skilled fighters, are immune to poison and can trigger an Adrenaline Rush in battle.\r\n\r\n\r\n\r\n\r\n",
+            Description = "The most naturally talented warriors in Tamriel, the Redguards of Hammerfell have a hardy constitution and a natural resistance to poison. They can call upon an Adrenaline Rush in combat.",
 
             Smithing = 20,
             HeavyArmour = 15,
@@ -307,5 +307,6 @@ internal class Race
 
 internal class Data
 {
-    public const string SKYRIM_LOGO = "                                                            \r\n                                                            \r\n                           -    =                           \r\n                          @.    :@                          \r\n                         @: -    =@                         \r\n                        @@  @#=   @@                        \r\n                       %@: .@  %  +@=                       \r\n                      =@@      :-  @@.                      \r\n                     .@@*:  +@-   :@@@                      \r\n                     @=@    @.      @=@                     \r\n                    @+@@  #=@@@ +#  @@-@                    \r\n                    *@@@%--*@@@@=*=@@*@-                    \r\n                     #@@@=@@@@@@@@+@@@+                     \r\n                      @@@  +=@@%*  @@#                      \r\n                       @@     @    @@                       \r\n                        @%    @.  @@                        \r\n                         @@  :@  @@                         \r\n                         :@ .@   @                          \r\n                          +  @                              \r\n                            +                               \r\n                            %                               \r\n                             @@                             \r\n                                                            \r\n                                                          ";
+    public const string SKYRIM_LOGO = "                                                            \r\n                                                            \r\n                          @.    :@                          \r\n                         @: -    =@                         \r\n                        @@  @#=   @@                        \r\n                       %@: .@  %  +@=                       \r\n                      =@@      :-  @@.                      \r\n                     .@@*:  +@-   :@@@                      \r\n                     @=@    @.      @=@                     \r\n                    @+@@  #=@@@ +#  @@-@                    \r\n                    *@@@%--*@@@@=*=@@*@-                    \r\n                     #@@@=@@@@@@@@+@@@+                     \r\n                      @@@  +=@@%*  @@#                      \r\n                       @@     @    @@                       \r\n                        @%    @.  @@                        \r\n                         @@  :@  @@                         \r\n                         :@ .@   @                          \r\n                          +  @                              \r\n                            +                               \r\n                            %                               \r\n                             @@                             \r\n                                                            \r\n                                                          ";
+    public const string DRAGON_ASCII = "                                               \r\n                                               \r\n                                               \r\n   @@@         @        @                      \r\n     #@@@@@=+* @@      @@         @            \r\n       -  *@@@@@@      @        @@==# .=%@@@@  \r\n       @   %-@@@@*     @      @@@@@@@@@@@      \r\n      @@@@@- . ##@    .@      @@=%@+   @       \r\n          .:: @: .@@@@@=@@@*@@ = :*%@@@@       \r\n             @=-@@@@ @.-  @@@@# @ ::           \r\n            .-        @@@        @             \r\n                     @@@@                      \r\n                      -@@                      \r\n                      @ @                      \r\n                        @                      \r\n                        @                      \r\n                       @*                      \r\n                      %#                       \r\n                      @                        \r\n                      @                        \r\n                      @                        \r\n                       @                     ";
 }

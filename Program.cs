@@ -49,6 +49,8 @@ internal class Program
             Scripts.PlayIntroScript();
         }
 
+        Scripts.FirstLoadingScript();
+
         Console.Clear();
         Race race = ShowCharacterCreationMenu();
 
@@ -64,7 +66,7 @@ internal class Program
             }
         }
 
-        // here
+
     }
 
     public static Race ShowCharacterCreationMenu() 
@@ -83,15 +85,11 @@ internal class Program
                     Console.WriteLine($"\n > {Race.Races[i].Name} \n");
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                 }
-                else
-                {
-                    Console.WriteLine($"{Race.Races[i].Name}");
-                }
+                else Console.WriteLine($"{Race.Races[i].Name}");           
             }
 
-            Console.SetCursorPosition(20, 20);
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine(Race.Races[activeRaceIndex].Description);
+            Console.WriteLine($"\n\n{Race.Races[activeRaceIndex].Description}");
             Console.ForegroundColor = ConsoleColor.DarkGray;
 
             ConsoleKeyInfo input = Console.ReadKey(intercept: true);

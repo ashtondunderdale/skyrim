@@ -30,7 +30,7 @@ internal class Scripts
         Clear();
 
         Console.ForegroundColor = BASECOLOUR;
-        Console.WriteLine("\n\n\tSkyrim");
+        Console.WriteLine("\n\n\t\tSkyrim");
         Sleep(7);
         Clear();
 
@@ -173,6 +173,22 @@ internal class Scripts
 
         PrintDialogue(NPC_HADVAR, "Wait. You there. Step forward. Who are you?");
         Sleep(2);
+    }
+
+    public static void FirstLoadingScript() 
+    {
+        Clear();
+
+        Console.ForegroundColor = Scripts.BASECOLOUR;
+        Console.Write(Data.DRAGON_ASCII);
+
+        Console.ForegroundColor = Scripts.CONTEXTCOLOUR;
+
+        PrintDialogueContext("\n\nAnd the scrolls have foretold, of black wings in the cold,\n" +
+                             "that when brothers wage war come unfurled! Alduin, Bane of\n" +
+                             "Kings, ancient shadow unbound, with a hunger to swallow the\n" +
+                             "world! - Song of the Dragonborn");
+        Sleep(12);
     }
 
     static void PlayIntroMusic()
