@@ -1,4 +1,4 @@
-﻿using skyrim;
+﻿using Skyrim;
 using System.Media;
 
 namespace Skyrim;
@@ -62,17 +62,12 @@ internal class Program
             if (!string.IsNullOrWhiteSpace(name))
             {
                 Player player = new(name, race);
+                GameContext game = new(player);
+
+                game.HelgenKeep();
+                
                 break;
             }
-        }
-
-        Scripts.PlayHelgenScript(race);
-
-        string helgenKeepChoice = Scripts.ShowPlayerDecisionOptions(new List<string>() { "Hadvar", "Ralof" }, "Enter the keep with Hadvar or Ralof.");
-
-        if (helgenKeepChoice == "Hadvar")
-        {
-            Scripts.PlayHelgenKeepHadvarScript();
         }
     }
 

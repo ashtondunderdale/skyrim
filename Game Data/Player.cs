@@ -1,10 +1,10 @@
 ﻿using Skyrim;
 
-namespace skyrim;
+namespace Skyrim;
 
 internal class Player
 {
-    readonly Race Race;
+    public readonly Race Race;
 
     string Name { get; set; }
 
@@ -18,6 +18,8 @@ internal class Player
 
     Scene? Scene { get; set; }
 
+    List<GameItem> Inventory = new() { };
+
     public Player(string name, Race race) 
     {
         Name = name;
@@ -27,7 +29,6 @@ internal class Player
         Magicka = race.Magicka;
     }
 
-    // Inventory List<GameItem>
     // LeftHandEquip / RightHandEquip
     // Head, Body, Arms, Boots, Ring, Necklace, Gloves, Equip
 }
