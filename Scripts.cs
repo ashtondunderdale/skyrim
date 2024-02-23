@@ -207,7 +207,7 @@ internal class Scripts
         Sleep(2);
 
         PrintDialogue(NPC_HADVAR, "Captain. What should we do? He's not on the list.");
-        Sleep(3);
+        Sleep(2);
 
         PrintDialogue(NPC_IMPERIAL_CAPTAIN, "Forget the list. He goes to the block.");
         Sleep(3);
@@ -219,10 +219,10 @@ internal class Scripts
         Sleep(2);
 
         PrintDialogueContext("You follow the Imperial Captain towards the block.");
-        Sleep(8);
+        Sleep(5);
 
         PrintDialogue(NPC_GENERAL_TULLIUS, "Ulfric Stormcloak. Some here in Helgen call you a hero. But a hero doesn't use a power like the Voice to murder his king and usurp his throne.");
-        Sleep(3);
+        Sleep(4);
 
         PrintDialogue(NPC_GENERAL_TULLIUS, "You started this war, plunged Skyrim into chaos, and now the Empire is going to put you down, and restore the peace.");
         Sleep(5);
@@ -237,13 +237,13 @@ internal class Scripts
         Sleep(2);
 
         PrintDialogue(NPC_IMPERIAL_CAPTAIN, "Yes, General Tullius.");
-        Sleep(2);
+        Sleep(1);
 
         PrintDialogue(NPC_IMPERIAL_CAPTAIN, "Give them their last rites");
         Sleep(3);
 
         PrintDialogue(NPC_PRIESTESS_OF_ARKAY, "As we commend your souls to Aetherius, blessings of the Eight Divines upon you, for you are the salt and earth of Nirn, our beloved...");
-        Sleep(5);
+        Sleep(4);
 
         PrintDialogueContext("The priestess is cut off by a Stormcloak soldier");
         Sleep(1);
@@ -261,7 +261,7 @@ internal class Scripts
         Sleep(2);
 
         PrintDialogue(NPC_STORMCLOAK_SOLDIER, "My ancestors are smiling at me, Imperials. Can you say the same?");
-        Sleep(3);
+        Sleep(4);
 
         PrintDialogueContext("The Soldiers head falls into the basket below.");
         Sleep(3);
@@ -280,6 +280,118 @@ internal class Scripts
 
         PrintDialogue(NPC_IMPERIAL_CAPTAIN, $"Next, the {race.Name}");
         Sleep(2);
+
+        PrintDialogueContext("You hear the eerie sound rumbling in the distance once more.");
+        Sleep(3);
+
+        PrintDialogue(NPC_HADVAR, "There it is again. Did you hear that?");
+        Sleep(3);
+
+        PrintDialogue(NPC_IMPERIAL_CAPTAIN, "I said, next prisoner!");
+        Sleep(2);
+
+        PrintDialogue(NPC_HADVAR, "To the block, prisoner. Nice and easy.");
+        Sleep(2);
+
+        PrintDialogueContext("You walk over to the chopping block and lie down, facing the sky.");
+        Sleep(4);
+
+        PrintDialogue(NPC_GENERAL_TULLIUS, "What in Oblivion is that?");
+        Sleep(2);
+
+        PrintDialogueContext("A dragon emerges from the clouds.");
+        Sleep(2);
+
+        PrintDialogue(NPC_IMPERIAL_CAPTAIN, "Sentries! What do you see?");
+        Sleep(2);
+
+        PrintDialogue(NPC_IMPERIAL_SOLDIER, "It's in the clouds!");
+        Sleep(2);
+
+        PrintDialogue(NPC_STORMCLOAK_SOLDIER, "Dragon!");
+        Sleep(2);
+
+        PrintDialogueContext("The dragon unleashes its thunderous voice upon the world.");
+        Sleep(2);
+
+        PrintDialogue(NPC_RALOF, $"Hey {race.Name}. Get up! Come on, the gods won't give use another chance!");
+        Sleep(3);
+
+        PrintDialogueContext("You follow Ralof through Helgen, trying to find a safe path between the fire, falling rocks, and rubble. You eventually come to an opening and find Hadvar.");
+        Sleep(4);
+
+        PrintDialogue(NPC_HADVAR, $"Still alive prisoner? Keep close to me if you want to stay that way.");
+        Sleep(2);
+
+        PrintDialogueContext("You follow Hadvar towards the keep. Hidden next to a stone wall, the dragon lands above you and shouts what seemed like thunder through the air.");
+        Sleep(3);
+
+        PrintDialogueContext("You continue to follow Hadvar. Ralof appears and stands in his way");
+        Sleep(2);
+
+        PrintDialogue(NPC_HADVAR, "Ralof! You damned trator. Out of my way!");
+        Sleep(3);
+
+        PrintDialogue(NPC_RALOF, "We're escaping, Hadvar. You're not stopping us this time.");
+        Sleep(2);
+
+        PrintDialogue(NPC_HADVAR, "Fine. I hope that dragon takes you all to Sovngarde.");
+        Sleep(2);
+
+        PrintDialogue(NPC_RALOF, "You! Come on, into the keep!");
+        Sleep(1);
+
+        PrintDialogue(NPC_HADVAR, "With me, prisoner. Let's go!");
+        Sleep(3);
+
+        ShowPlayerDecisionOptions(new List<string>() { "Hadvar", "Ralof" }, "Enter the keep with Hadvar or Ralof.");
+    }
+
+    public static string ShowPlayerDecisionOptions(List<string> options, string decisionHeader)
+    {
+        Clear();
+
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        int activeOptionIndex = 0;
+        string activeOption = options[activeOptionIndex];
+
+        while (true)
+        {
+            Console.WriteLine($"{decisionHeader}\n");
+
+            for (int i = 0; i < options.Count; i++)
+            {
+                if (options[i] == activeOption)
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"\n > {options[i]} \n");
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                }
+                else Console.WriteLine($"{options[i]}");
+            }
+
+            ConsoleKeyInfo input = Console.ReadKey(intercept: true);
+
+            if (input.Key == ConsoleKey.UpArrow)
+            {
+                if (activeOptionIndex - 1 > -1)
+                {
+                    activeOptionIndex--;
+                    activeOption = options[activeOptionIndex];
+                }
+            }
+            else if (input.Key == ConsoleKey.DownArrow)
+            {
+                if (activeOptionIndex < options.Count - 1)
+                {
+                    activeOptionIndex++;
+                    activeOption = options[activeOptionIndex];
+                }
+            }
+            else if (input.Key == ConsoleKey.Enter) return options[activeOptionIndex];
+
+            Console.Clear();
+        }
     }
 
     public static void FirstLoadingScript()
