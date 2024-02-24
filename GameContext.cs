@@ -2,19 +2,23 @@
 
 internal class GameContext
 {
-    Player Player { get; set; }
-    Scene? Scene { get; set; }
+    public Player Player { get; set; }
+    public Scene? Scene { get; set; }
 
     public GameContext(Player player) 
     {
         Player = player;
     }
 
+    public void LoadScene(Scene scene, Action script) 
+    {
+        Scene = scene;
+        script();
+    }
+
     public void HelgenKeep() 
     {
-        Scene = Scene.HelgenKeep;
-
-        Scripts.PlayHelgenScript(Player.Race);
+        // Scripts.PlayHelgenScript(Player.Race);
 
         string helgenKeepChoice = Scripts.ShowPlayerDecisionOptions(new List<string>() { "Hadvar", "Ralof" }, "Enter the keep with Hadvar or Ralof.");
 
@@ -22,5 +26,11 @@ internal class GameContext
         {
             Scripts.PlayHelgenKeepHadvarScript();
         }
+        else 
+        {
+            Scripts.PlayHelgenKeepRalofScript();
+        }
+
+        
     }
 }

@@ -64,7 +64,7 @@ internal class Program
                 Player player = new(name, race);
                 GameContext game = new(player);
 
-                game.HelgenKeep();
+                game.LoadScene(Scene.HelgenKeep, game.HelgenKeep);
                 
                 break;
             }

@@ -361,6 +361,11 @@ internal class Scripts
         Sleep(3);
     }
 
+    public static void PlayHelgenKeepRalofScript() 
+    { 
+    
+    }
+
     public static string ShowPlayerDecisionOptions(List<string> options, string decisionHeader)
     {
         Clear();
@@ -439,6 +444,7 @@ internal class Scripts
 
     static void PrintDialogue(string speaker, string dialogue)
     {
+        Console.ForegroundColor = BASECOLOUR;
         Console.Write($"\n{speaker}: ");
 
         foreach (char c in dialogue)
