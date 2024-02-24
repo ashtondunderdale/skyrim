@@ -31,6 +31,18 @@ internal class GameContext
             Scripts.PlayHelgenKeepRalofScript();
         }
 
-        
+        PromptEnter();
+
+
+    }
+
+    public static void PromptEnter() 
+    {
+        Console.ForegroundColor = Scripts.CONTEXTCOLOUR;
+        Console.WriteLine("\n\n\tPress Enter.");
+        Console.ForegroundColor = Scripts.BASECOLOUR;
+
+        Console.ReadKey();
+        Console.Clear();
     }
 }
