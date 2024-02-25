@@ -3,6 +3,7 @@
 internal class Scene
 {
     public List<GameItem> Objects { get; set; }
+
     public static Scene HelgenKeep { get; }
 
     static Scene()
@@ -11,10 +12,14 @@ internal class Scene
         {
             Objects = new List<GameItem>
             {
-                new ItemContainer(new List<GameItem>
+                new ItemContainer("Chest", new List<GameItem>
                 {
-                    Weapon.IronSword
-                })
+                    Weapon.IronSword,
+                    Apparel.ImperialLightArmor,
+                }),
+
+                Weapon.IronSword,
+                Apparel.ImperialLightArmor,
             }
         };
     }

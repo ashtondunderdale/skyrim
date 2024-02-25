@@ -4,8 +4,9 @@ internal class ItemContainer : GameItem
 {    
     public List<GameItem> GameItems { get; set; }
 
-    public ItemContainer(List<GameItem> gameItems) 
-    { 
+    public ItemContainer(string name, List<GameItem> gameItems)
+    {
+        Name = name;
         GameItems = gameItems;
     }
 }

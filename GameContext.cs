@@ -3,7 +3,7 @@
 internal class GameContext
 {
     public Player Player { get; set; }
-    public Scene? Scene { get; set; }
+    public static Scene? Scene { get; set; }
 
     public GameContext(Player player) 
     {
@@ -33,7 +33,37 @@ internal class GameContext
 
         PromptEnter();
 
+        while (true) 
+        {
+            Console.Clear();
 
+            PrintSceneObjects("You decide to look around the Imperial barracks.");
+        }
+    }
+
+    public static void PrintSceneObjects(string sceneHeader) 
+    {
+        List<string> sceneObjects = new();
+
+        Console.WriteLine($"{sceneHeader}\n");
+
+        foreach (var sceneObject in Scene.Objects)
+        {
+            if (sceneObject is ItemContainer container)
+            {
+                Console.WriteLine($"{container.Name} ({container.GameItems.Count})");
+                sceneObjects.Add(container.Name!);
+            }
+            else
+            {
+                Console.WriteLine(sceneObject.Name);
+                sceneObjects.Add(sceneObject.Name!);
+            }
+        }
+
+        Scripts.ShowPlayerDecisionOptions(sceneObjects, "");
+
+        Console.ReadLine();
     }
 
     public static void PromptEnter() 
