@@ -16,10 +16,18 @@ internal class Scene
                 {
                     Weapon.IronSword,
                     Apparel.ImperialLightArmor,
+                    Apparel.ImperialLightBoots,
                 }),
 
                 Weapon.IronSword,
                 Apparel.ImperialLightArmor,
+
+                new ItemContainer("Chest", new List<GameItem>
+                {
+                    Apparel.ImperialLightBoots,
+                }),
+
+                Apparel.ImperialLightHelmet,
             }
         };
     }

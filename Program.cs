@@ -5,10 +5,11 @@ namespace Skyrim;
 
 internal class Program
 {
+    static SoundPlayer SoundPlayer = new(@"C:\Users\adunderdale\source\repos\lang\bin\Debug\menu.wav");
+
     static void Main()
     {
-        SoundPlayer player = new(@"C:\Users\adunderdale\source\repos\lang\bin\Debug\menu.wav");
-        PlayMenuMusic(player);
+        PlayMenuMusic();
 
         while (true) 
         {
@@ -23,12 +24,10 @@ internal class Program
             switch (menuChoice)
             {
                 case "1":
-                    player.Stop();
                     PlayNewGame();
                     break;
 
                 case "2":
-                    player.Stop();
                     // to implement continue game
                     break;
 
@@ -43,6 +42,8 @@ internal class Program
     {
         Console.WriteLine("\nPlay Intro? (y)");
         string? playIntro = Console.ReadLine();
+
+        SoundPlayer.Stop();
 
         Scripts.FirstLoadingScript();
 
@@ -118,11 +119,11 @@ internal class Program
         }
     }
 
-    static void PlayMenuMusic(SoundPlayer player)
+    static void PlayMenuMusic()
     {
         try
         {
-            player.Play();
+            SoundPlayer.Play();
         }
         catch (Exception ex)
         {

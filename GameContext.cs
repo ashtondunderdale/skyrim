@@ -43,7 +43,7 @@ internal class GameContext
 
     public static void PrintSceneObjects(string sceneHeader) 
     {
-        List<string> sceneObjects = new();
+        List<dynamic> sceneObjects = new();
 
         Console.WriteLine($"{sceneHeader}\n");
 
@@ -61,9 +61,55 @@ internal class GameContext
             }
         }
 
-        Scripts.ShowPlayerDecisionOptions(sceneObjects, "");
+        dynamic selectedObject = ListItemsInScene(sceneObjects);
+        Console.Write(selectedObject);
 
         Console.ReadLine();
+    }
+
+    public static dynamic ListItemsInScene(List<dynamic> sceneObjects)
+    {
+        Console.Clear();
+
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        int activeOptionIndex = 0;
+        dynamic activeOption = sceneObjects[activeOptionIndex];
+
+        while (true)
+        {
+            for (int i = 0; i < sceneObjects.Count; i++)
+            {
+                if (sceneObjects[i] == activeOption)
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"\n > {sceneObjects[i]} \n");
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                }
+                else Console.WriteLine($"{sceneObjects[i]}");
+            }
+
+            ConsoleKeyInfo input = Console.ReadKey(true);
+
+            if (input.Key == ConsoleKey.UpArrow)
+            {
+                if (activeOptionIndex - 1 > -1)
+                {
+                    activeOptionIndex--;
+                    activeOption = sceneObjects[activeOptionIndex];
+                }
+            }
+            else if (input.Key == ConsoleKey.DownArrow)
+            {
+                if (activeOptionIndex < sceneObjects.Count - 1)
+                {
+                    activeOptionIndex++;
+                    activeOption = sceneObjects[activeOptionIndex];
+                }
+            }
+            else if (input.Key == ConsoleKey.Enter) return sceneObjects[activeOptionIndex];
+
+            Console.Clear();
+        }
     }
 
     public static void PromptEnter() 
