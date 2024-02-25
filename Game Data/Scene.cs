@@ -14,20 +14,20 @@ internal class Scene
             {
                 new ItemContainer("Chest", new List<GameItem>
                 {
-                    Weapon.IronSword,
-                    Apparel.ImperialLightArmor,
-                    Apparel.ImperialLightBoots,
+                    new Weapon("Iron Sword", 7, 9, 25),
+                    new Apparel("Imperial Light Armor", 23, 6, 75),
+                    new Apparel("Imperial Light Boots", 6, 2, 5),
                 }),
 
-                Weapon.IronSword,
-                Apparel.ImperialLightArmor,
+                new Weapon("Iron Sword", 7, 9, 25),
+                new Apparel("Imperial Light Armor", 23, 6, 75),
 
                 new ItemContainer("Chest", new List<GameItem>
                 {
-                    Apparel.ImperialLightBoots,
+                    new Apparel("Imperial Light Boots", 6, 2, 5),
                 }),
 
-                Apparel.ImperialLightHelmet,
+                new Apparel("Imperial Light Helmet", 11, 2, 75),
             }
         };
     }

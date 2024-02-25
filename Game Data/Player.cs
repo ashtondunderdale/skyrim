@@ -18,7 +18,7 @@ internal class Player
 
     Scene? Scene { get; set; }
 
-    List<GameItem> Inventory = new() { };
+    public List<GameItem> Inventory = new();
 
     public Player(string name, Race race) 
     {

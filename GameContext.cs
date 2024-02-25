@@ -2,7 +2,7 @@
 
 internal class GameContext
 {
-    public Player Player { get; set; }
+    public static Player Player { get; set; }
     public static Scene? Scene { get; set; }
 
     public GameContext(Player player) 
@@ -24,7 +24,7 @@ internal class GameContext
 
         if (helgenKeepChoice == "Hadvar")
         {
-            Scripts.PlayHelgenKeepHadvarScript();
+            //Scripts.PlayHelgenKeepHadvarScript();
         }
         else 
         {
@@ -37,37 +37,54 @@ internal class GameContext
         {
             Console.Clear();
 
-            PrintSceneObjects("You decide to look around the Imperial barracks.");
+            GetSceneObjects("You decide to look around the Imperial barracks.");
         }
     }
 
-    public static void PrintSceneObjects(string sceneHeader) 
+    private static List<dynamic>? initializedSceneObjects; // Declare a static field to store initialized scene objects
+
+    public static void GetSceneObjects(string sceneHeader)
     {
-        List<dynamic> sceneObjects = new();
+        List<dynamic> sceneObjects;
 
-        Console.WriteLine($"{sceneHeader}\n");
-
-        foreach (var sceneObject in Scene.Objects)
+        if (initializedSceneObjects == null)
         {
-            if (sceneObject is ItemContainer container)
+            // If the scene objects haven't been initialized yet, fetch them from Scene.Objects
+            sceneObjects = new List<dynamic>();
+            foreach (var sceneObject in Scene.Objects)
             {
-                Console.WriteLine($"{container.Name} ({container.GameItems.Count})");
-                sceneObjects.Add(container);
+                if (sceneObject is ItemContainer container)
+                {
+                    sceneObjects.Add(container);
+                }
+                else
+                {
+                    sceneObjects.Add(sceneObject);
+                }
             }
-            else
-            {
-                Console.WriteLine(sceneObject.Name);
-                sceneObjects.Add(sceneObject);
-            }
+            initializedSceneObjects = sceneObjects; // Store the initialized scene objects
+        }
+        else
+        {
+            // If the scene objects have already been initialized, use the stored sceneObjects
+            sceneObjects = initializedSceneObjects;
         }
 
-        dynamic selectedObject = ListItemsInScene(sceneObjects);
-        Console.Write(selectedObject);
+        dynamic selectedObject = ListItemsInScene(sceneObjects, sceneHeader);
+        sceneObjects.Remove(selectedObject);
 
-        Console.ReadLine();
+        AddToInventory(selectedObject);
     }
 
-    public static dynamic ListItemsInScene(List<dynamic> sceneObjects)
+
+    public static void AddToInventory(dynamic selectedObject) 
+    {
+        Player.Inventory.Add(selectedObject);
+        Console.Write($"Added: {selectedObject.Name}");
+        Console.ReadKey();
+    }
+
+    public static dynamic ListItemsInScene(List<dynamic> sceneObjects, string sceneHeader)
     {
         Console.Clear();
 
@@ -77,15 +94,39 @@ internal class GameContext
 
         while (true)
         {
+            Console.WriteLine($"{sceneHeader}\n");
+
             for (int i = 0; i < sceneObjects.Count; i++)
             {
                 if (ReferenceEquals(sceneObjects[i], activeOption))
                 {
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine($"\n > {sceneObjects[i].Name} \n");
+                    Console.Write($"\n > {sceneObjects[i].Name}");
+
+                    if (sceneObjects[i] is ItemContainer container && container.GameItems != null)
+                    {
+                        Console.WriteLine($" ({container.GameItems.Count})\n");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\n");
+                    }
+
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                 }
-                else Console.WriteLine($"{sceneObjects[i].Name}");
+                else
+                {
+                    Console.Write($"{sceneObjects[i].Name}");
+
+                    if (sceneObjects[i] is ItemContainer container && container.GameItems != null)
+                    {
+                        Console.WriteLine($" ({container.GameItems.Count})");
+                    }
+                    else 
+                    { 
+                        Console.Write("\n");
+                    }
+                }
             }
 
             ConsoleKeyInfo input = Console.ReadKey(true);
@@ -106,12 +147,30 @@ internal class GameContext
                     activeOption = sceneObjects[activeOptionIndex];
                 }
             }
-            else if (input.Key == ConsoleKey.Enter) return sceneObjects[activeOptionIndex];
+            else if (input.Key == ConsoleKey.Enter)
+            {
+                if (sceneObjects[activeOptionIndex] is ItemContainer container)
+                {
+                    dynamic selectedFromContainer = ListItemsInScene(container.GameItems.Select(x => (dynamic)x).ToList(), sceneHeader);
+                    container.GameItems.Remove(selectedFromContainer);
+
+                    if (selectedFromContainer != null)
+                    {
+                        return selectedFromContainer;
+                    }
+                    else
+                    {
+                        return container;
+                    }
+                }
+
+                return sceneObjects[activeOptionIndex];
+            }
+
 
             Console.Clear();
         }
     }
-
 
     public static void PromptEnter() 
     {

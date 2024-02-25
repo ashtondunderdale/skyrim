@@ -45,7 +45,7 @@ internal class Program
 
         SoundPlayer.Stop();
 
-        Scripts.FirstLoadingScript();
+        //Scripts.FirstLoadingScript();
 
         if (playIntro == "y")
         {
