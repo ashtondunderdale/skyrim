@@ -304,14 +304,3 @@ internal class Race
         },
     };
 }
-
-internal class Data
-{
-    public const string SKYRIM_LOGO = "                                                            \r\n                                                            \r\n                          @.    :@                          \r\n                         @: -    =@                         \r\n                        @@  @#=   @@                        \r\n                       %@: .@  %  +@=                       \r\n                      =@@      :-  @@.                      \r\n                     .@@*:  +@-   :@@@                      \r\n                     @=@    @.      @=@                     \r\n                    @+@@  #=@@@ +#  @@-@                    \r\n                    *@@@%--*@@@@=*=@@*@-                    \r\n                     #@@@=@@@@@@@@+@@@+                     \r\n                      @@@  +=@@%*  @@#                      \r\n                       @@     @    @@                       \r\n                        @%    @.  @@                        \r\n                         @@  :@  @@                         \r\n                         :@ .@   @                          \r\n                          +  @                              \r\n                            +                               \r\n                            %                               \r\n                             @@                             \r\n                                                            \r\n                                                          ";
-    public const string DRAGON_ASCII = "                                               \r\n                                               \r\n                                               \r\n   @@@         @        @                      \r\n     #@@@@@=+* @@      @@         @            \r\n       -  *@@@@@@      @        @@==# .=%@@@@  \r\n       @   %-@@@@*     @      @@@@@@@@@@@      \r\n      @@@@@- . ##@    .@      @@=%@+   @       \r\n          .:: @: .@@@@@=@@@*@@ = :*%@@@@       \r\n             @=-@@@@ @.-  @@@@# @ ::           \r\n            .-        @@@        @             \r\n                     @@@@                      \r\n                      -@@                      \r\n                      @ @                      \r\n                        @                      \r\n                        @                      \r\n                       @*                      \r\n                      %#                       \r\n                      @                        \r\n                      @                        \r\n                      @                        \r\n                       @                     ";
-}
-
-internal class Items 
-{ 
-
-}

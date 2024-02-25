@@ -13,7 +13,7 @@ internal class Program
         while (true)
         {
             Console.ForegroundColor = Scripts.BASECOLOUR;
-            Console.Write(Data.SKYRIM_LOGO);
+            Console.Write(Scripts.SKYRIM_LOGO);
 
             Console.ForegroundColor = Scripts.CONTEXTCOLOUR;
             Console.WriteLine("\n\n1. New\n2. Load\n");
@@ -46,10 +46,7 @@ internal class Program
 
         //Scripts.FirstLoadingScript();
 
-        if (playIntro == "y")
-        {
-            Scripts.PlayIntroScript();
-        }
+        if (playIntro == "y") Scripts.PlayIntroScript();      
 
         Console.Clear();
         Race race = ShowCharacterCreationMenu();

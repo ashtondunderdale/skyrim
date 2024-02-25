@@ -19,11 +19,14 @@ internal class Scripts
     public const ConsoleColor CONTEXTCOLOUR = ConsoleColor.DarkGray;
     public const ConsoleColor BASECOLOUR = ConsoleColor.White;
 
+    public const string SKYRIM_LOGO = "                                                            \r\n                                                            \r\n                          @.    :@                          \r\n                         @: -    =@                         \r\n                        @@  @#=   @@                        \r\n                       %@: .@  %  +@=                       \r\n                      =@@      :-  @@.                      \r\n                     .@@*:  +@-   :@@@                      \r\n                     @=@    @.      @=@                     \r\n                    @+@@  #=@@@ +#  @@-@                    \r\n                    *@@@%--*@@@@=*=@@*@-                    \r\n                     #@@@=@@@@@@@@+@@@+                     \r\n                      @@@  +=@@%*  @@#                      \r\n                       @@     @    @@                       \r\n                        @%    @.  @@                        \r\n                         @@  :@  @@                         \r\n                         :@ .@   @                          \r\n                          +  @                              \r\n                            +                               \r\n                            %                               \r\n                             @@                             \r\n                                                            \r\n                                                          ";
+    public const string DRAGON_ASCII = "                                               \r\n                                               \r\n                                               \r\n   @@@         @        @                      \r\n     #@@@@@=+* @@      @@         @            \r\n       -  *@@@@@@      @        @@==# .=%@@@@  \r\n       @   %-@@@@*     @      @@@@@@@@@@@      \r\n      @@@@@- . ##@    .@      @@=%@+   @       \r\n          .:: @: .@@@@@=@@@*@@ = :*%@@@@       \r\n             @=-@@@@ @.-  @@@@# @ ::           \r\n            .-        @@@        @             \r\n                     @@@@                      \r\n                      -@@                      \r\n                      @ @                      \r\n                        @                      \r\n                        @                      \r\n                       @*                      \r\n                      %#                       \r\n                      @                        \r\n                      @                        \r\n                      @                        \r\n                       @                     ";
+
     public static void PlayIntroScript()
     {
         Clear();
 
-        Sleep(5);
+        Sleep(3);
         PlayIntroMusic();
 
         Sleep(17);
@@ -417,7 +420,7 @@ internal class Scripts
         Clear();
 
         Console.ForegroundColor = BASECOLOUR;
-        Console.Write(Data.DRAGON_ASCII);
+        Console.Write(DRAGON_ASCII);
 
         Console.ForegroundColor = CONTEXTCOLOUR;
 

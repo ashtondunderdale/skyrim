@@ -20,7 +20,7 @@ internal class GameContext
 
     public void HelgenKeep()
     {
-        // Scripts.PlayHelgenScript(Player.Race);
+        //Scripts.PlayHelgenScript(Player.Race);
 
         string helgenKeepChoice = Scripts.ShowPlayerDecisionOptions(new List<string>() { "Hadvar", "Ralof" }, "Enter the keep with Hadvar or Ralof.");
 
@@ -199,6 +199,7 @@ internal class GameContext
         Console.Clear();
 
         Console.WriteLine($"{Player.Name} | Level {Player.Level}");
+        Console.WriteLine($"\nMagicka {Player.Magicka}  |  Health {Player.Health}  | Stamina {Player.Stamina}\n");
 
         Dictionary<string, int> itemCounts = new();
 
