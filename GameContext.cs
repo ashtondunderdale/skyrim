@@ -52,12 +52,12 @@ internal class GameContext
             if (sceneObject is ItemContainer container)
             {
                 Console.WriteLine($"{container.Name} ({container.GameItems.Count})");
-                sceneObjects.Add(container.Name!);
+                sceneObjects.Add(container);
             }
             else
             {
                 Console.WriteLine(sceneObject.Name);
-                sceneObjects.Add(sceneObject.Name!);
+                sceneObjects.Add(sceneObject);
             }
         }
 
@@ -79,13 +79,13 @@ internal class GameContext
         {
             for (int i = 0; i < sceneObjects.Count; i++)
             {
-                if (sceneObjects[i] == activeOption)
+                if (ReferenceEquals(sceneObjects[i], activeOption))
                 {
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine($"\n > {sceneObjects[i]} \n");
+                    Console.WriteLine($"\n > {sceneObjects[i].Name} \n");
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                 }
-                else Console.WriteLine($"{sceneObjects[i]}");
+                else Console.WriteLine($"{sceneObjects[i].Name}");
             }
 
             ConsoleKeyInfo input = Console.ReadKey(true);
@@ -111,6 +111,7 @@ internal class GameContext
             Console.Clear();
         }
     }
+
 
     public static void PromptEnter() 
     {
