@@ -18,6 +18,6 @@ internal class Apparel : GameItem
 
     public static Apparel CreateNewInstance(Apparel apparel)
     {
-        return new Apparel(apparel.Name, apparel.Armor, apparel.Weight, apparel.Value);
+        return new Apparel(apparel.Name!, apparel.Armor, apparel.Weight, apparel.Value);
     }
 }

@@ -7,18 +7,18 @@ internal class GameContext
 
     private static List<dynamic>? InitialisedSceneObjects;
 
-    public GameContext(Player player) 
+    public GameContext(Player player)
     {
         Player = player;
     }
 
-    public void LoadScene(Scene scene, Action script) 
+    public void LoadScene(Scene scene, Action script)
     {
         Scene = scene;
         script();
     }
 
-    public void HelgenKeep() 
+    public void HelgenKeep()
     {
         // Scripts.PlayHelgenScript(Player.Race);
 
@@ -28,14 +28,14 @@ internal class GameContext
         {
             //Scripts.PlayHelgenKeepHadvarScript();
         }
-        else 
+        else
         {
             Scripts.PlayHelgenKeepRalofScript();
         }
 
         PromptEnter();
 
-        while (true) 
+        while (true)
         {
             Console.Clear();
 
@@ -47,7 +47,7 @@ internal class GameContext
     {
         List<dynamic> sceneObjects;
 
-        if (InitialisedSceneObjects == null)
+        if (InitialisedSceneObjects == null && Scene!.Objects is not null)
         {
             sceneObjects = new List<dynamic>();
             foreach (var sceneObject in Scene.Objects)
@@ -61,11 +61,11 @@ internal class GameContext
                     sceneObjects.Add(sceneObject);
                 }
             }
-            InitialisedSceneObjects = sceneObjects; 
+            InitialisedSceneObjects = sceneObjects;
         }
         else
         {
-            sceneObjects = InitialisedSceneObjects;
+            sceneObjects = InitialisedSceneObjects!;
         }
 
         dynamic selectedObject = ListItemsInScene(sceneObjects, sceneHeader);
@@ -75,36 +75,42 @@ internal class GameContext
     }
 
 
-    public static void AddToInventory(dynamic selectedObject) 
+    public static void AddToInventory(dynamic selectedObject)
     {
         if (selectedObject is not null)
         {
             Player.Inventory.Add(selectedObject);
-            Console.Write($"Added: {selectedObject.Name}");
+            Console.Write($"\nAdded: {selectedObject.Name}");
             Console.ReadKey();
         }
     }
 
-public static dynamic ListItemsInScene(List<dynamic> sceneObjects, string sceneHeader)
-{
-    Console.Clear();
+    public static dynamic ListItemsInScene(List<dynamic> sceneObjects, string sceneHeader)
+    {
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.DarkGray;
 
-    Console.ForegroundColor = ConsoleColor.DarkGray;
-    int activeOptionIndex = 0;
-    dynamic activeOption = sceneObjects.Count > 0 ? sceneObjects[activeOptionIndex] : null;
+        int activeOptionIndex = 0;
+        dynamic activeOption = sceneObjects.Count > 0 ? sceneObjects[activeOptionIndex] : null;
 
-    while (true)
+        DisplaySceneObjects(sceneObjects, sceneHeader, activeOption);
+
+        return ProcessUserItemAction(sceneObjects, activeOptionIndex, sceneHeader);
+    }
+
+
+    private static void DisplaySceneObjects(List<dynamic> sceneObjects, string sceneHeader, dynamic activeOption)
     {
         Console.WriteLine($"{sceneHeader}\n");
 
-        for (int i = 0; i < sceneObjects.Count; i++)
+        foreach (var sceneObject in sceneObjects)
         {
-            if (ReferenceEquals(sceneObjects[i], activeOption))
+            if (ReferenceEquals(sceneObject, activeOption))
             {
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write($"\n > {sceneObjects[i].Name}");
+                Console.Write($"\n > {sceneObject.Name}");
 
-                if (sceneObjects[i] is ItemContainer container && container.GameItems != null && container.GameItems.Count > 0)
+                if (sceneObject is ItemContainer container && container.GameItems != null && container.GameItems.Count > 0)
                 {
                     Console.WriteLine($" ({container.GameItems.Count})\n");
                 }
@@ -117,37 +123,40 @@ public static dynamic ListItemsInScene(List<dynamic> sceneObjects, string sceneH
             }
             else
             {
-                Console.Write($"{sceneObjects[i].Name}");
+                Console.Write($"{sceneObject.Name}");
 
-                if (sceneObjects[i] is ItemContainer container && container.GameItems != null && container.GameItems.Count > 0)
+                if (sceneObject is ItemContainer container && container.GameItems != null && container.GameItems.Count > 0)
                 {
                     Console.WriteLine($" ({container.GameItems.Count})");
                 }
-                else 
-                { 
+                else
+                {
                     Console.Write("\n");
                 }
             }
         }
+    }
 
-        ConsoleKeyInfo input = Console.ReadKey(true);
+    private static dynamic ProcessUserItemAction(List<dynamic> sceneObjects, int activeOptionIndex, string sceneHeader)
+    {
+        while (true)
+        {
+            ConsoleKeyInfo input = Console.ReadKey(true);
 
-        if (input.Key == ConsoleKey.UpArrow)
-        {
-            if (activeOptionIndex - 1 > -1)
+            if (input.Key == ConsoleKey.UpArrow)
             {
-                activeOptionIndex--;
-                activeOption = sceneObjects[activeOptionIndex];
+                if (activeOptionIndex - 1 > -1)
+                {
+                    activeOptionIndex--;
+                }
             }
-        }
-        else if (input.Key == ConsoleKey.DownArrow)
-        {
-            if (activeOptionIndex < sceneObjects.Count - 1)
+            else if (input.Key == ConsoleKey.DownArrow)
             {
-                activeOptionIndex++;
-                activeOption = sceneObjects[activeOptionIndex];
+                if (activeOptionIndex < sceneObjects.Count - 1)
+                {
+                    activeOptionIndex++;
+                }
             }
-        }
             else if (input.Key == ConsoleKey.Enter)
             {
                 if (sceneObjects[activeOptionIndex] is ItemContainer container)
@@ -171,18 +180,53 @@ public static dynamic ListItemsInScene(List<dynamic> sceneObjects, string sceneH
                         return null;
                     }
                 }
-
                 return sceneObjects[activeOptionIndex];
             }
-
-
+            else if (input.Key == ConsoleKey.Tab)
+            {
+                DisplayInventory();
+            }
 
             Console.Clear();
+            dynamic activeOption = sceneObjects.Count > 0 ? sceneObjects[activeOptionIndex] : null;
+
+            DisplaySceneObjects(sceneObjects, sceneHeader, activeOption);
+        }
     }
-}
+
+    public static void DisplayInventory()
+    {
+        Console.Clear();
+
+        Console.WriteLine($"{Player.Name} | Level {Player.Level}");
+
+        Dictionary<string, int> itemCounts = new();
+
+        foreach (GameItem item in Player.Inventory)
+        {
+            if (itemCounts.ContainsKey(item.Name!))
+            {
+                itemCounts[item.Name!]++;
+            }
+            else
+            {
+                itemCounts[item.Name!] = 1;
+            }
+        }
+
+        foreach (var pair in itemCounts)
+        {
+            string itemName = pair.Key;
+            int itemCount = pair.Value;
+
+            Console.WriteLine($"{itemName} ({itemCount})");
+        }
+
+        Console.ReadKey();
+    }
 
 
-    public static void PromptEnter() 
+    public static void PromptEnter()
     {
         Console.ForegroundColor = Scripts.CONTEXTCOLOUR;
         Console.WriteLine("\n\n\tPress Enter.");

@@ -1,5 +1,4 @@
 ﻿using System.Media;
-
 namespace Skyrim;
 
 internal class Scripts
@@ -344,7 +343,7 @@ internal class Scripts
         Sleep(3);
     }
 
-    public static void PlayHelgenKeepHadvarScript() 
+    public static void PlayHelgenKeepHadvarScript()
     {
         Clear();
 
@@ -361,9 +360,9 @@ internal class Scripts
         Sleep(3);
     }
 
-    public static void PlayHelgenKeepRalofScript() 
-    { 
-    
+    public static void PlayHelgenKeepRalofScript()
+    {
+
     }
 
     public static string ShowPlayerDecisionOptions(List<string> options, string decisionHeader)
@@ -417,10 +416,10 @@ internal class Scripts
     {
         Clear();
 
-        Console.ForegroundColor = Scripts.BASECOLOUR;
+        Console.ForegroundColor = BASECOLOUR;
         Console.Write(Data.DRAGON_ASCII);
 
-        Console.ForegroundColor = Scripts.CONTEXTCOLOUR;
+        Console.ForegroundColor = CONTEXTCOLOUR;
 
         PrintDialogueContext("\n\nAnd the scrolls have foretold, of black wings in the cold,\n" +
                              "that when brothers wage war come unfurled! Alduin, Bane of\n" +

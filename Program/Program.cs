@@ -1,5 +1,4 @@
-﻿using Skyrim;
-using System.Media;
+﻿using System.Media;
 
 namespace Skyrim;
 
@@ -11,7 +10,7 @@ internal class Program
     {
         PlayMenuMusic();
 
-        while (true) 
+        while (true)
         {
             Console.ForegroundColor = Scripts.BASECOLOUR;
             Console.Write(Data.SKYRIM_LOGO);
@@ -38,7 +37,7 @@ internal class Program
         }
     }
 
-    public static void PlayNewGame() 
+    public static void PlayNewGame()
     {
         Console.WriteLine("\nPlay Intro? (y)");
         string? playIntro = Console.ReadLine();
@@ -55,7 +54,7 @@ internal class Program
         Console.Clear();
         Race race = ShowCharacterCreationMenu();
 
-        while (true) 
+        while (true)
         {
             Console.WriteLine("\nEnter name: ");
             string? name = Console.ReadLine();
@@ -66,13 +65,13 @@ internal class Program
                 GameContext game = new(player);
 
                 game.LoadScene(Scene.HelgenKeep, game.HelgenKeep);
-                
+
                 break;
             }
         }
     }
 
-    public static Race ShowCharacterCreationMenu() 
+    public static Race ShowCharacterCreationMenu()
     {
         Console.ForegroundColor = ConsoleColor.DarkGray;
         int activeRaceIndex = 0;
@@ -88,7 +87,7 @@ internal class Program
                     Console.WriteLine($"\n > {Race.Races[i].Name} \n");
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                 }
-                else Console.WriteLine($"{Race.Races[i].Name}");           
+                else Console.WriteLine($"{Race.Races[i].Name}");
             }
 
             Console.ForegroundColor = ConsoleColor.White;
@@ -113,7 +112,7 @@ internal class Program
                     activeRace = Race.Races[activeRaceIndex];
                 }
             }
-            else if (input.Key == ConsoleKey.Enter) return Race.Races[activeRaceIndex];     
+            else if (input.Key == ConsoleKey.Enter) return Race.Races[activeRaceIndex];
 
             Console.Clear();
         }
