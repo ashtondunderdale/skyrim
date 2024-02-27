@@ -79,9 +79,12 @@ internal class GameContext
     {
         if (selectedObject is not null)
         {
-            Player.Inventory.Add(selectedObject);
-            Console.Write($"\nAdded: {selectedObject.Name}");
-            Console.ReadKey();
+            if (Player.CalculateInventoryWeight() + selectedObject.Weight < Player.MaxWeight)
+            {
+                Player.Inventory.Add(selectedObject);
+                Console.Write($"\nAdded: {selectedObject.Name}");
+                Console.ReadKey();
+            }
         }
     }
 
@@ -198,7 +201,7 @@ internal class GameContext
     {
         Console.Clear();
 
-        Console.WriteLine($"{Player.Name} | Level {Player.Level}");
+        Console.WriteLine($"{Player.Name} | Level {Player.Level}\tWeight: {Player.CalculateInventoryWeight()} / {Player.MaxWeight}");
         Console.WriteLine($"\nMagicka {Player.Magicka}  |  Health {Player.Health}  | Stamina {Player.Stamina}\n");
 
         Dictionary<string, int> itemCounts = new();
@@ -226,7 +229,6 @@ internal class GameContext
         Console.ReadKey();
     }
 
-
     public static void PromptEnter()
     {
         Console.ForegroundColor = Scripts.CONTEXTCOLOUR;
@@ -235,5 +237,10 @@ internal class GameContext
 
         Console.ReadKey();
         Console.Clear();
+    }
+
+    public static void CalculateInventoryWeight() 
+    { 
+    
     }
 }
