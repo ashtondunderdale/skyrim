@@ -69,13 +69,15 @@ internal class GameContext
         }
 
         dynamic selectedObject = ListItemsInScene(sceneObjects, sceneHeader);
-        sceneObjects.Remove(selectedObject);
 
-        AddToInventory(selectedObject);
+        if (AddToInventory(selectedObject)) 
+        {
+            sceneObjects.Remove(selectedObject);
+        }
     }
 
 
-    public static void AddToInventory(dynamic selectedObject)
+    public static bool AddToInventory(dynamic selectedObject)
     {
         if (selectedObject is not null)
         {
@@ -84,8 +86,10 @@ internal class GameContext
                 Player.Inventory.Add(selectedObject);
                 Console.Write($"\nAdded: {selectedObject.Name}");
                 Console.ReadKey();
+                return true;
             }
         }
+        return false;
     }
 
     public static dynamic ListItemsInScene(List<dynamic> sceneObjects, string sceneHeader)
@@ -167,7 +171,11 @@ internal class GameContext
                     if (container.GameItems != null && container.GameItems.Count > 0)
                     {
                         dynamic selectedFromContainer = ListItemsInScene(container.GameItems.Select(x => (dynamic)x).ToList(), sceneHeader);
-                        container.GameItems.Remove(selectedFromContainer);
+
+                        if (Player.CalculateInventoryWeight() + selectedFromContainer.Weight < Player.MaxWeight) 
+                        {
+                            container.GameItems.Remove(selectedFromContainer);
+                        }
 
                         if (selectedFromContainer != null)
                         {
@@ -237,10 +245,5 @@ internal class GameContext
 
         Console.ReadKey();
         Console.Clear();
-    }
-
-    public static void CalculateInventoryWeight() 
-    { 
-    
     }
 }
