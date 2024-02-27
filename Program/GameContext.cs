@@ -3,7 +3,11 @@
 internal class GameContext
 {
     public static Player Player { get; set; }
-    public static Scene? Scene { get; set; }
+
+    public static Scene? ParentScene { get; set; }
+
+    public static SubScene? SubScene { get; set; }
+
 
     private static List<dynamic>? InitialisedSceneObjects;
 
@@ -12,9 +16,9 @@ internal class GameContext
         Player = player;
     }
 
-    public void LoadScene(Scene scene, Action script)
+    public void LoadScene(SubScene scene, Action script)
     {
-        Scene = scene;
+        SubScene = scene;
         script();
     }
 
@@ -47,10 +51,10 @@ internal class GameContext
     {
         List<dynamic> sceneObjects;
 
-        if (InitialisedSceneObjects == null && Scene!.Objects is not null)
+        if (InitialisedSceneObjects == null && SubScene.Objects is not null)
         {
             sceneObjects = new List<dynamic>();
-            foreach (var sceneObject in Scene.Objects)
+            foreach (var sceneObject in SubScene.Objects)
             {
                 if (sceneObject is ItemContainer container)
                 {
@@ -150,19 +154,13 @@ internal class GameContext
         {
             ConsoleKeyInfo input = Console.ReadKey(true);
 
-            if (input.Key == ConsoleKey.UpArrow)
+            if (input.Key == ConsoleKey.UpArrow && activeOptionIndex - 1 > -1)
             {
-                if (activeOptionIndex - 1 > -1)
-                {
-                    activeOptionIndex--;
-                }
+                activeOptionIndex--;   
             }
-            else if (input.Key == ConsoleKey.DownArrow)
+            else if (input.Key == ConsoleKey.DownArrow && activeOptionIndex < sceneObjects.Count - 1)
             {
-                if (activeOptionIndex < sceneObjects.Count - 1)
-                {
-                    activeOptionIndex++;
-                }
+                activeOptionIndex++;               
             }
             else if (input.Key == ConsoleKey.Enter)
             {
@@ -177,27 +175,16 @@ internal class GameContext
                             container.GameItems.Remove(selectedFromContainer);
                         }
 
-                        if (selectedFromContainer != null)
-                        {
-                            return selectedFromContainer;
-                        }
-                        else
-                        {
-                            return container;
-                        }
+                        return selectedFromContainer is not null ? selectedFromContainer : container;
+
                     }
-                    else
-                    {
-                        return null;
-                    }
+                    else return null;
+                    
                 }
                 return sceneObjects[activeOptionIndex];
             }
-            else if (input.Key == ConsoleKey.Tab)
-            {
-                DisplayInventory();
-            }
-
+            else if (input.Key == ConsoleKey.Tab) DisplayInventory();
+            
             Console.Clear();
             dynamic activeOption = sceneObjects.Count > 0 ? sceneObjects[activeOptionIndex] : null;
 
@@ -209,7 +196,7 @@ internal class GameContext
     {
         Console.Clear();
 
-        Console.WriteLine($"{Player.Name} | Level {Player.Level}\tWeight: {Player.CalculateInventoryWeight()} / {Player.MaxWeight}");
+        Console.WriteLine($"{Player.Race.Name}: {Player.Name} | Level {Player.Level}    Weight: {Player.CalculateInventoryWeight()} / {Player.MaxWeight}");
         Console.WriteLine($"\nMagicka {Player.Magicka}  |  Health {Player.Health}  | Stamina {Player.Stamina}\n");
 
         Dictionary<string, int> itemCounts = new();

@@ -8,6 +8,8 @@ internal class Player
 
     public int Level { get; set; }
 
+    public double Experience { get; set; }
+
     public int Health { get; set; }
 
     public int Stamina { get; set; }
@@ -16,9 +18,23 @@ internal class Player
 
     public List<GameItem> Inventory = new();
 
-    public double InventoryWeight;
+    public double InventoryWeight { get; set; }
 
-    public double MaxWeight;
+    public double MaxWeight { get; set; }
+
+    public GameItem? LeftHandEquip { get; set; }
+
+    public GameItem? RightHandEquip { get; set; }
+
+    public GameItem? HeadEquip { get; set; }
+
+    public GameItem? BodyEquip { get; set; }
+
+    public GameItem? ArmsEquip { get; set; }
+
+    public GameItem? BootsEquip { get; set; }
+
+    public GameItem? GlovesEquip { get; set; }
 
     public Player(string name, Race race) 
     {
@@ -29,11 +45,10 @@ internal class Player
         Stamina = race.Stamina;
         Magicka = race.Magicka;
 
-        MaxWeight = 20;
+        Experience = 0;
+        Level = 1;
+        MaxWeight = 300;
     }
-
-    // LeftHandEquip / RightHandEquip
-    // Head, Body, Arms, Boots, Ring, Necklace, Gloves, Equip
 
     public double CalculateInventoryWeight() 
     {

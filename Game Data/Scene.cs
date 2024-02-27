@@ -1,34 +1,30 @@
-﻿namespace Skyrim;
+﻿using System.Collections.Generic;
 
-internal class Scene
+namespace Skyrim
 {
-    public List<GameItem>? Objects { get; set; }
-
-    public static Scene HelgenKeep { get; }
-
-    static Scene()
+    internal class Scene
     {
-        HelgenKeep = new Scene
+        public List<SubScene> SubScenes { get; set; }
+
+        public static Scene HelgenKeep { get; } = new Scene();
+        public static Scene Riverwood { get; } = new Scene();
+        public static Scene Whiterun { get; } = new Scene();
+
+        static Scene()
         {
-            Objects = new List<GameItem>
+            HelgenKeep.SubScenes = new List<SubScene>()
             {
-                new ItemContainer("Chest", new List<GameItem>
-                {
-                    new Weapon("Iron Sword", 7, 9, 25),
-                    new Apparel("Imperial Light Armor", 23, 6, 75),
-                    new Apparel("Imperial Light Boots", 6, 2, 5),
-                }),
+                SubScene.HelgenKeepBarracks,
 
-                new Weapon("Iron Sword", 7, 9, 25),
-                new Apparel("Imperial Light Armor", 23, 6, 75),
+            };
 
-                new ItemContainer("Chest", new List<GameItem>
-                {
-                    new Apparel("Imperial Light Boots", 6, 2, 5),
-                }),
+            Riverwood.SubScenes = new List<SubScene>()
+            {
+            };
 
-                new Apparel("Imperial Light Helmet", 11, 2, 75),
-            }
-        };
+            Whiterun.SubScenes = new List<SubScene>()
+            {
+            };
+        }
     }
 }
