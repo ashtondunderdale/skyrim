@@ -13,7 +13,7 @@ internal class SubScene
     {
         HelgenKeepBarracks = new SubScene
         {
-            Name = "HelgenKeepBarracks",
+            Name = "Helgen Keep Barracks",
 
             Objects = new List<GameItem>
             {
@@ -38,7 +38,7 @@ internal class SubScene
 
         HelgenKeepStorageRoom = new SubScene
         {
-            Name = "HelgenKeepStorageRoom",
+            Name = "Helgen Keep Storage Room",
 
             Objects = new List<GameItem>
             {
@@ -54,7 +54,7 @@ internal class SubScene
 
         HelgenKeepDungeon = new SubScene
         {
-            Name = "HelgenKeepDungeon",
+            Name = "Helgen Keep Dungeon",
 
             Objects = new List<GameItem>
             {

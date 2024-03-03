@@ -2,7 +2,7 @@
 
 internal class GameContext
 {
-    public static Player Player { get; set; }
+    public static Player? Player { get; set; }
 
     public static Scene? ParentScene { get; set; }
 
@@ -10,15 +10,18 @@ internal class GameContext
 
 
     private static List<dynamic>? InitialisedSceneObjects;
+    private static List<dynamic>? InitialisedSubScenes = new();
 
     public GameContext(Player player)
     {
         Player = player;
     }
 
-    public void LoadScene(SubScene scene, Action script)
+    public void LoadScene(Scene scene, Action script)
     {
-        SubScene = scene;
+        ParentScene = scene;
+        SubScene = scene.SubScenes[0];
+
         script();
     }
 
@@ -53,19 +56,39 @@ internal class GameContext
 
         if (InitialisedSceneObjects is null && SubScene is not null && SubScene.Objects is not null)
         {
-            sceneObjects = new List<dynamic>();
+            sceneObjects = new List<dynamic>(); 
+
             foreach (var sceneObject in SubScene.Objects)
             {
-                if (sceneObject is ItemContainer container) sceneObjects.Add(container);                
-                else sceneObjects.Add(sceneObject);               
+                if (sceneObject is ItemContainer container)
+                {
+                    sceneObjects.Add(container);
+                }
+                else 
+                {
+                    sceneObjects.Add(sceneObject);
+                }
             }
             InitialisedSceneObjects = sceneObjects;
         }
         else sceneObjects = InitialisedSceneObjects ?? new List<dynamic>();
-        
+
+        if (InitialisedSubScenes.Count == 0)
+        {
+            foreach (var scene in ParentScene.SubScenes)
+            {
+                sceneObjects.Add(scene);
+                InitialisedSubScenes.Add(scene);
+            }
+        }
+
         dynamic selectedObject = ListItemsInScene(sceneObjects, sceneHeader);
 
-        if (AddToInventory(selectedObject)) sceneObjects.Remove(selectedObject);       
+        if (selectedObject is SubScene) 
+        {
+            SubScene = selectedObject;
+        }
+        else if (AddToInventory(selectedObject)) sceneObjects.Remove(selectedObject);       
     }
 
     public static dynamic ListItemsInScene(List<dynamic> sceneObjects, string sceneHeader)
@@ -84,9 +107,16 @@ internal class GameContext
     private static void DisplaySceneObjects(List<dynamic> sceneObjects, string sceneHeader, dynamic activeOption)
     {
         Console.WriteLine($"{sceneHeader}\n");
+        bool subSceneSpaceFlag = true;
 
         foreach (var sceneObject in sceneObjects)
         {
+            if (sceneObject is SubScene && subSceneSpaceFlag)
+            {
+                Console.WriteLine();
+                subSceneSpaceFlag = false;
+            }
+
             if (ReferenceEquals(sceneObject, activeOption))
             {
                 Console.ForegroundColor = ConsoleColor.White;
@@ -116,14 +146,6 @@ internal class GameContext
                     Console.Write("\n");
                 }
             }
-        }
-    }
-
-    private static void DisplaySubScenes() 
-    {
-        foreach (var scene in ParentScene.SubScenes) 
-        {
-            Console.Write(scene);
         }
     }
 
