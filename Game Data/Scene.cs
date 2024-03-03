@@ -4,7 +4,7 @@ namespace Skyrim
 {
     internal class Scene
     {
-        public List<SubScene> SubScenes { get; set; }
+        public List<SubScene>? SubScenes { get; set; }
 
         public static Scene HelgenKeep { get; } = new Scene();
         public static Scene Riverwood { get; } = new Scene();
@@ -15,7 +15,8 @@ namespace Skyrim
             HelgenKeep.SubScenes = new List<SubScene>()
             {
                 SubScene.HelgenKeepBarracks,
-
+                SubScene.HelgenKeepStorageRoom,
+                SubScene.HelgenKeepDungeon,
             };
 
             Riverwood.SubScenes = new List<SubScene>()

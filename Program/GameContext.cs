@@ -51,49 +51,21 @@ internal class GameContext
     {
         List<dynamic> sceneObjects;
 
-        if (InitialisedSceneObjects == null && SubScene.Objects is not null)
+        if (InitialisedSceneObjects is null && SubScene is not null && SubScene.Objects is not null)
         {
             sceneObjects = new List<dynamic>();
             foreach (var sceneObject in SubScene.Objects)
             {
-                if (sceneObject is ItemContainer container)
-                {
-                    sceneObjects.Add(container);
-                }
-                else
-                {
-                    sceneObjects.Add(sceneObject);
-                }
+                if (sceneObject is ItemContainer container) sceneObjects.Add(container);                
+                else sceneObjects.Add(sceneObject);               
             }
             InitialisedSceneObjects = sceneObjects;
         }
-        else
-        {
-            sceneObjects = InitialisedSceneObjects!;
-        }
-
+        else sceneObjects = InitialisedSceneObjects ?? new List<dynamic>();
+        
         dynamic selectedObject = ListItemsInScene(sceneObjects, sceneHeader);
 
-        if (AddToInventory(selectedObject)) 
-        {
-            sceneObjects.Remove(selectedObject);
-        }
-    }
-
-
-    public static bool AddToInventory(dynamic selectedObject)
-    {
-        if (selectedObject is not null)
-        {
-            if (Player.CalculateInventoryWeight() + selectedObject.Weight < Player.MaxWeight)
-            {
-                Player.Inventory.Add(selectedObject);
-                Console.Write($"\nAdded: {selectedObject.Name}");
-                Console.ReadKey();
-                return true;
-            }
-        }
-        return false;
+        if (AddToInventory(selectedObject)) sceneObjects.Remove(selectedObject);       
     }
 
     public static dynamic ListItemsInScene(List<dynamic> sceneObjects, string sceneHeader)
@@ -102,13 +74,12 @@ internal class GameContext
         Console.ForegroundColor = ConsoleColor.DarkGray;
 
         int activeOptionIndex = 0;
-        dynamic activeOption = sceneObjects.Count > 0 ? sceneObjects[activeOptionIndex] : null;
+        dynamic activeOption = sceneObjects.Count > 0 ? sceneObjects[activeOptionIndex] : "no objects";
 
         DisplaySceneObjects(sceneObjects, sceneHeader, activeOption);
 
         return ProcessUserItemAction(sceneObjects, activeOptionIndex, sceneHeader);
     }
-
 
     private static void DisplaySceneObjects(List<dynamic> sceneObjects, string sceneHeader, dynamic activeOption)
     {
@@ -121,7 +92,7 @@ internal class GameContext
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write($"\n > {sceneObject.Name}");
 
-                if (sceneObject is ItemContainer container && container.GameItems != null && container.GameItems.Count > 0)
+                if (sceneObject is ItemContainer container && container.GameItems is not null && container.GameItems.Count > 0)
                 {
                     Console.WriteLine($" ({container.GameItems.Count})\n");
                 }
@@ -136,7 +107,7 @@ internal class GameContext
             {
                 Console.Write($"{sceneObject.Name}");
 
-                if (sceneObject is ItemContainer container && container.GameItems != null && container.GameItems.Count > 0)
+                if (sceneObject is ItemContainer container && container.GameItems is not null && container.GameItems.Count > 0)
                 {
                     Console.WriteLine($" ({container.GameItems.Count})");
                 }
@@ -145,6 +116,14 @@ internal class GameContext
                     Console.Write("\n");
                 }
             }
+        }
+    }
+
+    private static void DisplaySubScenes() 
+    {
+        foreach (var scene in ParentScene.SubScenes) 
+        {
+            Console.Write(scene);
         }
     }
 
@@ -166,19 +145,18 @@ internal class GameContext
             {
                 if (sceneObjects[activeOptionIndex] is ItemContainer container)
                 {
-                    if (container.GameItems != null && container.GameItems.Count > 0)
+                    if (container.GameItems is not null && container.GameItems.Count > 0)
                     {
                         dynamic selectedFromContainer = ListItemsInScene(container.GameItems.Select(x => (dynamic)x).ToList(), sceneHeader);
 
-                        if (Player.CalculateInventoryWeight() + selectedFromContainer.Weight < Player.MaxWeight) 
+                        if (Player.CalculateInventoryWeight() + selectedFromContainer.Weight < Player.MaxWeight)
                         {
                             container.GameItems.Remove(selectedFromContainer);
                         }
 
                         return selectedFromContainer is not null ? selectedFromContainer : container;
-
                     }
-                    else return null;
+                    else return "null or no objects";
                     
                 }
                 return sceneObjects[activeOptionIndex];
@@ -186,10 +164,25 @@ internal class GameContext
             else if (input.Key == ConsoleKey.Tab) DisplayInventory();
             
             Console.Clear();
-            dynamic activeOption = sceneObjects.Count > 0 ? sceneObjects[activeOptionIndex] : null;
+            dynamic activeOption = sceneObjects.Count > 0 ? sceneObjects[activeOptionIndex] : "no objects";
 
             DisplaySceneObjects(sceneObjects, sceneHeader, activeOption);
         }
+    }
+
+    public static bool AddToInventory(dynamic selectedObject)
+    {
+        if (selectedObject is not null)
+        {
+            if (Player.CalculateInventoryWeight() + selectedObject.Weight < Player.MaxWeight)
+            {
+                Player.Inventory.Add(selectedObject);
+                Console.Write($"\nAdded: {selectedObject.Name}");
+                Console.ReadKey();
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void DisplayInventory()
@@ -203,14 +196,8 @@ internal class GameContext
 
         foreach (GameItem item in Player.Inventory)
         {
-            if (itemCounts.ContainsKey(item.Name!))
-            {
-                itemCounts[item.Name!]++;
-            }
-            else
-            {
-                itemCounts[item.Name!] = 1;
-            }
+            if (itemCounts.ContainsKey(item.Name!)) itemCounts[item.Name!]++;          
+            else itemCounts[item.Name!] = 1;    
         }
 
         foreach (var pair in itemCounts)
