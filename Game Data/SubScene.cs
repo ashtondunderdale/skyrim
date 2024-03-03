@@ -4,6 +4,9 @@ internal class SubScene
 {
     public List<GameItem>? Objects { get; set; }
     public string? Name { get; set; }
+    public string? SceneHeader { get; set; }
+
+    public bool ItemsPreviouslyLoaded = false;
 
     public static SubScene HelgenKeepBarracks { get; }
     public static SubScene HelgenKeepStorageRoom { get; }
@@ -14,6 +17,7 @@ internal class SubScene
         HelgenKeepBarracks = new SubScene
         {
             Name = "Helgen Keep Barracks",
+            SceneHeader = "You decide to look around the Imperial barracks.",
 
             Objects = new List<GameItem>
             {
@@ -39,6 +43,7 @@ internal class SubScene
         HelgenKeepStorageRoom = new SubScene
         {
             Name = "Helgen Keep Storage Room",
+            SceneHeader = "You find an old storage room, maybe there are some potions around.",
 
             Objects = new List<GameItem>
             {
@@ -55,6 +60,7 @@ internal class SubScene
         HelgenKeepDungeon = new SubScene
         {
             Name = "Helgen Keep Dungeon",
+            SceneHeader = "You find an what seems to be a dungeon containing some prison cages.",
 
             Objects = new List<GameItem>
             {

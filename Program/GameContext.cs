@@ -1,4 +1,6 @@
-﻿namespace Skyrim;
+﻿using System.ComponentModel;
+
+namespace Skyrim;
 
 internal class GameContext
 {
@@ -46,7 +48,7 @@ internal class GameContext
         {
             Console.Clear();
 
-            GetSceneObjects("You decide to look around the Imperial barracks.");
+            GetSceneObjects(SubScene.SceneHeader);
         }
     }
 
@@ -54,7 +56,7 @@ internal class GameContext
     {
         List<dynamic> sceneObjects;
 
-        if (InitialisedSceneObjects is null && SubScene is not null && SubScene.Objects is not null)
+        if ((InitialisedSceneObjects is null || InitialisedSceneObjects.Count == 0) && SubScene is not null && SubScene.Objects is not null)
         {
             sceneObjects = new List<dynamic>(); 
 
@@ -70,6 +72,11 @@ internal class GameContext
                 }
             }
             InitialisedSceneObjects = sceneObjects;
+
+            foreach (var scene in InitialisedSubScenes)
+            {
+                InitialisedSceneObjects.Add(scene);
+            }
         }
         else sceneObjects = InitialisedSceneObjects ?? new List<dynamic>();
 
@@ -78,6 +85,7 @@ internal class GameContext
             foreach (var scene in ParentScene.SubScenes)
             {
                 sceneObjects.Add(scene);
+
                 InitialisedSubScenes.Add(scene);
             }
         }
@@ -87,8 +95,11 @@ internal class GameContext
         if (selectedObject is SubScene) 
         {
             SubScene = selectedObject;
-        }
-        else if (AddToInventory(selectedObject)) sceneObjects.Remove(selectedObject);       
+            InitialisedSceneObjects.Clear();
+
+            GetSceneObjects(SubScene.SceneHeader);
+
+        } else if (AddToInventory(selectedObject)) sceneObjects.Remove(selectedObject);       
     }
 
     public static dynamic ListItemsInScene(List<dynamic> sceneObjects, string sceneHeader)
@@ -97,7 +108,7 @@ internal class GameContext
         Console.ForegroundColor = ConsoleColor.DarkGray;
 
         int activeOptionIndex = 0;
-        dynamic activeOption = sceneObjects.Count > 0 ? sceneObjects[activeOptionIndex] : "no objects";
+        dynamic activeOption = sceneObjects.Count > 0 ? sceneObjects[activeOptionIndex] : null;
 
         DisplaySceneObjects(sceneObjects, sceneHeader, activeOption);
 
@@ -178,7 +189,7 @@ internal class GameContext
 
                         return selectedFromContainer is not null ? selectedFromContainer : container;
                     }
-                    else return "null or no objects";
+                    else return null;
                     
                 }
                 return sceneObjects[activeOptionIndex];
@@ -186,7 +197,7 @@ internal class GameContext
             else if (input.Key == ConsoleKey.Tab) DisplayInventory();
             
             Console.Clear();
-            dynamic activeOption = sceneObjects.Count > 0 ? sceneObjects[activeOptionIndex] : "no objects";
+            dynamic activeOption = sceneObjects.Count > 0 ? sceneObjects[activeOptionIndex] : null;
 
             DisplaySceneObjects(sceneObjects, sceneHeader, activeOption);
         }
@@ -194,7 +205,7 @@ internal class GameContext
 
     public static bool AddToInventory(dynamic selectedObject)
     {
-        if (selectedObject is not null)
+        if (selectedObject is not null && selectedObject is not ItemContainer)
         {
             if (Player.CalculateInventoryWeight() + selectedObject.Weight < Player.MaxWeight)
             {
